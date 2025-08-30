@@ -2,6 +2,9 @@ import { z, defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { allowedTechsEnum } from '@/types/collections.ts';
 
+type Achievement = string | Achievement[];
+const AchievementSchema: z.ZodType<Achievement> = z.lazy(() => z.union([z.string(), z.array(AchievementSchema)]));
+
 // eslint-disable-next-line import/prefer-default-export
 export const collections = {
   project: defineCollection({
@@ -58,7 +61,7 @@ export const collections = {
             link: z.string(),
           }),
           time: z.string(),
-          achievements: z.array(z.string()),
+          achievements: z.array(AchievementSchema),
           techs: z.array(z.string()),
         }),
       ),

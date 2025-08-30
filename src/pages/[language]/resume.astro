@@ -15,6 +15,21 @@ const currentTime = new Date()
   .toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
   .replace(/\//g, '-');
 
+type Achievement = string | Achievement[];
+function renderAchievements(list: Achievement): string {
+  if (!Array.isArray(list)) {
+    return `<li>${list}</li>`;
+  }
+  return list
+    .map((item) => {
+      if (Array.isArray(item)) {
+        return `<ul style="padding-left: 1.2em" class="list-disc list-inside">${renderAchievements(item)}</ul>`
+      }
+      return `<li>${item}</li>`
+    })
+    .join("")
+}
+  
 export function getStaticPaths() {
   return Object.keys(languages).map((language) => ({
     params: { language },
@@ -81,10 +96,7 @@ export function getStaticPaths() {
                            </li>
                          </ul>
                        </div>
-                       <ul class="list-disc list-inside">
-                         {
-                           experience.achievements.map(achievement => <li>{achievement}</li>)
-                         }
+                       <ul class="list-disc list-inside" set:html={renderAchievements(experience.achievements)}>
                        </ul>
                      </div>
                      <ul class="flex flex-wrap gap-2 text-xs">
