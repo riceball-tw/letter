@@ -42,6 +42,7 @@ const allowedTechs = [
   'GitHub Pages',
   'Netlify',
   'Cloudflare Workers',
+  'Node.js Test Runner',
 ] as const;
 
 // eslint-disable-next-line import/prefer-default-export
