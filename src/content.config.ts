@@ -11,7 +11,7 @@ export const collections = {
     loader: glob({ pattern: '**/[^_]*.mdx', base: './src/content/project' }),
     schema: z.object({
       draft: z.boolean(),
-      isWorkInProgress: z.boolean().optional(),
+      hasContainerized: z.boolean().optional(),
       title: z.string(),
       description: z.string(),
       link: z

@@ -228,12 +228,15 @@ document.addEventListener("astro:page-load", pageLoadEvent => {
             sortedProjects.map((project, index) => {
               const imagesInsideView = 2;
               return (
-                <li data-tech={project.data.tech} class="relative overflow-hidden flex flex-col gap-4">
+                <li data-tech={project.data.tech} class="relative overflow-hidden flex flex-col gap-4 group">
                   {
-                    project.data.isWorkInProgress && (
+                    project.data.hasContainerized && (
                       <div class="absolute top-0 right-0 z-(--z-index-work-ribbon)">
-                        <div class="w-32 h-8 absolute top-4 -right-8">
-                          <div class="h-full w-full text-primary-800 bg-accent tracking-widest text-center text-current leading-8 font-semibold transform rotate-45">{t('Work-4')}</div>
+                        <div class="w-56 h-10 absolute top-10 -right-12">
+                          <div style="--docker: #1D63ED" class="h-full w-full flex justify-center items-center gap-2 text-primary-50 bg-primary-600 group-hover:bg-(--docker) group-hover:saturate-100 saturate-0 transition-all text-center font-semibold transform rotate-45">
+                            <Icon size={24} name="simple-icons:docker" />
+                            <span>{t('Work-4')}</span>
+                            </div>
                         </div>
                       </div>
                     )
