@@ -13,16 +13,16 @@
     "lint": "eslint src/**/*.{js,astro}"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/mdx": "^4.3.13",
     "@tailwindcss/vite": "^4.0.14",
-    "astro": "^5.8.1",
+    "astro": "^5.17.2",
     "astro-icon": "^1.1.1",
     "astro-seo": "^0.7.2",
     "tailwindcss": "^4.0.14",
     "tailwindcss-fluid-type": "3.0.0--.beta.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.6",
     "@iconify-json/material-symbols": "^1.2.8",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.1.113",
