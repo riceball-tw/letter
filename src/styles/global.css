@@ -87,7 +87,7 @@
   }
 
   .highlight {
-    @apply relative;
+    @apply relative whitespace-nowrap;
   }
 
   .highlight::after {
