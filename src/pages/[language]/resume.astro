@@ -67,7 +67,7 @@ export function getStaticPaths() {
    
            <!-- Quote -->
             <div class="md:col-start-2 md:col-span-3 relative">
-              <blockquote class="text-primary-500 quote" set:html={resume.personalInfo.description}>
+              <blockquote class="text-primary-500 quote font-serif" set:html={resume.personalInfo.description}>
              </blockquote>
            </div>
          </div>
@@ -87,7 +87,7 @@ export function getStaticPaths() {
                          <h3 class="font-medium category-item-title">{experience.title}</h3>
                          <ul class="flex flex-wrap gap-x-4 text-primary-600">
                            <li>
-                             <time class="work-tag">{experience.time}</time>
+                             <time class="font-mono work-tag">{experience.time}</time>
                            </li>
                            <li>
                              <span class="work-tag">
@@ -96,7 +96,7 @@ export function getStaticPaths() {
                            </li>
                          </ul>
                        </div>
-                       <ul class="list-disc list-inside" set:html={renderAchievements(experience.achievements)}>
+                       <ul class="list-disc list-inside font-serif" set:html={renderAchievements(experience.achievements)}>
                        </ul>
                      </div>
                      <ul class="flex flex-wrap gap-2 text-xs">
@@ -145,8 +145,8 @@ export function getStaticPaths() {
              resume.education.map(education => (
                  <div class="md:col-start-2 md:col-span-3 space-y-4">
                    <h3 class="font-medium category-item-title">{education.title}</h3>
-                   <time class="work-tag text-primary-600">{education.time}</time>
-                   <p set:html={education.description}></p>
+                   <time class="font-mono work-tag text-primary-600">{education.time}</time>
+                   <p class="font-serif" set:html={education.description}></p>
                  </div>
                ))
            }
@@ -185,7 +185,7 @@ export function getStaticPaths() {
    
            <div class="col-span-3 flex gap-4">
              <div>
-               <p class="inline-block mb-2">{t('Resume-8')}</p>
+               <p class="inline-block mb-2 font-serif">{t('Resume-8')}</p>
      
                {resume.links.map((section) => (
                    <ul class="list-inside list-disc">
@@ -256,7 +256,7 @@ export function getStaticPaths() {
    
          <div class="flex flex-wrap gap-2 justify-between">
            <p>{t('Resume-9')}</p>
-           <p class="text-right whitespace-nowrap">
+           <p class="font-mono text-right whitespace-nowrap">
              {t('Resume-10')}{currentTime}</p>
          </div>
        </div>
