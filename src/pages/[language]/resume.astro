@@ -91,7 +91,7 @@ export function getStaticPaths() {
                            </li>
                            <li>
                              <span class="work-tag">
-                               <a class="hover:underline" href={experience.company.link}>{experience.company.name}</a>
+                               <a class="underline" href={experience.company.link}>{experience.company.name}</a>
                              </span>
                            </li>
                          </ul>
@@ -125,7 +125,7 @@ export function getStaticPaths() {
                    <div class="flex flex-col gap-2">
                      <h3 class="font-medium category-item-title">{achievement.title}</h3>
                      <p class="work-tag text-primary-600">
-                       <a class="hover:underline" href={achievement.url}>
+                       <a class="underline" href={achievement.url}>
                          {achievement.subtitle}
                        </a>
                      </p>
@@ -254,7 +254,7 @@ export function getStaticPaths() {
          
          <hr class="border-b">
    
-         <div class="flex flex-wrap gap-2 justify-between">
+         <div class="text-xs flex flex-wrap gap-2 justify-between">
            <p>{t('Resume-9')}</p>
            <p class="font-mono text-right whitespace-nowrap">
              {t('Resume-10')}{currentTime}</p>
