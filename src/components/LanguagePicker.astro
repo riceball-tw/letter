@@ -22,7 +22,7 @@ const t = useTranslations(Astro.currentLocale as LanguageKey);
 
         return (
         <li>
-          {isCurrentLocale ? <span class={`${linkStyle} ${stateStyle}`}>{name}</span> : <a class={`${linkStyle} ${stateStyle}`} href={changeLanguage(key as LanguageKey, Astro.url.pathname)}>{name}</a>
+          {isCurrentLocale ? <span class={`whitespace-nowrap ${linkStyle} ${stateStyle}`}>{name}</span> : <a class={`whitespace-nowrap ${linkStyle} ${stateStyle}`} href={changeLanguage(key as LanguageKey, Astro.url.pathname)}>{name}</a>
           }
         </li>
       )
