@@ -143,7 +143,7 @@ export function getStaticPaths() {
            </div>
            {
              resume.education.map(education => (
-                 <div class="md:col-start-2 md:col-span-3 space-y-4">
+                 <div class="md:col-start-2 md:col-span-3 ">
                    <h3 class="font-medium category-item-title">{education.title}</h3>
                    <time class="font-mono work-tag text-primary-600">{education.time}</time>
                    <p class="font-serif" set:html={education.description}></p>
