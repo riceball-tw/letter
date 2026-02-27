@@ -1,10 +1,6 @@
 @import 'tailwindcss';
 @config "../../tailwind.config.ts";
 @theme inline {
-  --font-*: initial;
-  --font-sans-serif: Noto Sans CJK TC, Noto Sans TC, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-
   --text-xs--line-height: calc(1 / 0.75);
   --text-sm--line-height: calc(1.25 / 0.875);
   --text-base--line-height: calc(1.5 / 1);
