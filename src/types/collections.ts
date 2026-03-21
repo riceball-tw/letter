@@ -43,6 +43,9 @@ const allowedTechs = [
   'Netlify',
   'Cloudflare Workers',
   'Node.js Test Runner',
+  'Go',
+  'Go Test',
+  'WASM',
 ] as const;
 
 // eslint-disable-next-line import/prefer-default-export
