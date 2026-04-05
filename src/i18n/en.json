@@ -2,11 +2,11 @@
   "Debug-1": "Hello, World",
   "Debug-2": "Hello, {name}",
 
-  "Hero-Greeting": "Hi, Riceball here",
-  "Hero-Intro": "I'm a web developer from Taiwan, Passionate about building {appsLink}!",
+  "Hero-Greeting": "Hi, I'm Riceball.",
+  "Hero-Intro": "A web developer from Taiwan passionate about building {appsLink}!",
   "Hero-Apps": "engaging web apps",
   "Hero-BlogLink": "200+ blog articles",
-  "Hero-CTA": "Take a look at my work, explore {articlesLink}, or view my {resumeLink}.",
+  "Hero-CTA": "Feel free to explore my work, {articlesLink}, or check out my {resumeLink}.",
   "Hero-Resume": "Resume",
 
   "NewestWork-1": "Newest Work",

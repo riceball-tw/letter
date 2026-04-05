@@ -12,7 +12,7 @@
   
 ## Key Features
 
-- Astro v5 + Tailwind v4
+- Astro v6 + Tailwind v4
 - Built-in i18n
 - CI pipeline (ESLint + Prettier + TS Typecheck + Lighthouse)
 - CD pipeline ([Cloudflare Pages](https://pages.cloudflare.com/))
