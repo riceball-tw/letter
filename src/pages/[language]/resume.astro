@@ -3,33 +3,14 @@ import Base from '@/layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
 import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
 import { getEntry } from 'astro:content';
-// Only use qrcode in dev env
-// eslint-disable-next-line import/no-extraneous-dependencies
-import QRCode from 'qrcode'
+import ModernResume from '@/components/resume/ModernResume.astro';
+import TraditionalResume from '@/components/resume/TraditionalResume.astro';
 
 const currentLocale = Astro.currentLocale as LanguageKey;
 const t = useTranslations(currentLocale as LanguageKey);
 const resume = (await getEntry('resume', currentLocale))?.data;
 if (!resume) throw new Error('Resume Data is not found')
-const currentTime = new Date()
-  .toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
-  .replace(/\//g, '-');
 
-type Achievement = string | Achievement[];
-function renderAchievements(list: Achievement): string {
-  if (!Array.isArray(list)) {
-    return `<li>${list}</li>`;
-  }
-  return list
-    .map((item) => {
-      if (Array.isArray(item)) {
-        return `<ul style="padding-left: 1.2em" class="list-disc list-inside">${renderAchievements(item)}</ul>`
-      }
-      return `<li>${item}</li>`
-    })
-    .join("")
-}
-  
 export function getStaticPaths() {
   return Object.keys(languages).map((language) => ({
     params: { language },
@@ -37,229 +18,36 @@ export function getStaticPaths() {
 }
 ---
 <Base title={t('Resume-1')}>
-<div style="padding-top: var(--navbar-height)" class='pb-16 flex flex-col gap-12'>
-  <div class="container mx-auto flex justify-center">
-    <div class="relative">
-      <div class="a4 bg-white space-y-4 shadow-xl print:shadow-none">
-         <!-- Intro -->
-         <div class="grid md:grid-cols-4 grid-cols-1">
-           <!-- Personal Info -->
-           <div class="flex flex-col gap-4">
-             <!-- Personal properties -->
-             <div>
-               <h1 class="font-medium name">{resume.personalInfo.name}</h1>
-               <div class="font-medium">{resume.personalInfo.role}</div>
-               <!-- <div class="text-primary-600">{resume.personalInfo.location}</div> -->
-             </div>
-             <!-- Socials -->
-             <ul class="flex -ml-2">
-               {
-                 resume.personalInfo.socialLinks.map(link => (
-                   <li>
-                     <a class="hover:bg-primary-50 rounded-sm p-2 inline-block" title={link.name} href={link.url}>
-                       <Icon size={16}  name={link.icon} />
-                     </a>
-                   </li>  
-                 ))
-               }
-             </ul>
-           </div>
-   
-           <!-- Quote -->
-            <div class="md:col-start-2 md:col-span-3 relative">
-              <blockquote class="text-primary-500 quote font-serif" set:html={resume.personalInfo.description}>
-             </blockquote>
-           </div>
-         </div>
-         <hr class="border-b">
-         <!-- Work Experience -->
-         <div class="grid md:grid-cols-4 grid-cols-1">
-           <div class="flex items-center gap-2 pb-1 md:pb-0 md:items-start">
-             <Icon class="inline-block md:hidden" size={24} name="material-symbols:home-work-outline-rounded" />
-             <h2 class="font-medium category-title">{t('Resume-2')}</h2>
-           </div>
-           <div class="md:col-start-2 md:col-span-3 space-y-4">
-             {
-               resume.workExperience.map(experience => (
-                   <div class="flex flex-col gap-2">
-                     <div>
-                       <div class="mb-2">
-                         <h3 class="font-medium category-item-title">{experience.title}</h3>
-                         <ul class="flex flex-wrap gap-x-4 text-primary-600">
-                           <li>
-                             <time class="font-mono work-tag">{experience.time}</time>
-                           </li>
-                           <li>
-                             <span class="work-tag">
-                               <a class="underline" href={experience.company.link}>{experience.company.name}</a>
-                             </span>
-                           </li>
-                         </ul>
-                       </div>
-                       <ul class="list-disc list-inside font-serif" set:html={renderAchievements(experience.achievements)}>
-                       </ul>
-                     </div>
-                     <ul class="flex flex-wrap gap-2 text-xs">
-                     {
-                       experience.techs.map(tech => <li class="border border-primary-100 bg-primary-50 text-primary-800  rounded-md inline-block p-1 px-2 whitespace-nowrap work-tag">
-                         {tech}
-                       </li>)
-                     }
-                       
-                     </ul>
-                   </div>
-                 ))
-             }
-           </div>
-         </div>
-         <hr class="border-b">
-         <!-- Achievements -->
-         <div class="grid md:grid-cols-4 grid-cols-1">
-           <div class="flex items-center gap-2 pb-1 md:pb-0 md:items-start">
-             <Icon class="inline-block md:hidden" size={24} name="material-symbols:cheer-outline-rounded" />
-             <h2 class="font-medium category-title">{t('Resume-3')}</h2>
-           </div>
-           <div class="md:col-start-2 md:col-span-3 space-y-4">
-             {
-               resume.achievements.map(achievement => (
-                   <div class="flex flex-col gap-2">
-                     <h3 class="font-medium category-item-title">{achievement.title}</h3>
-                     <p class="work-tag text-primary-600">
-                       <a class="underline" href={achievement.url}>
-                         {achievement.subtitle}
-                       </a>
-                     </p>
-                   </div>
-                 ))
-             }
-           </div>
-         </div>
-         <hr class="border-b">
-         <!-- Education -->
-         <div class="grid md:grid-cols-4 grid-cols-1">
-           <div class="flex items-center gap-2 pb-1 md:pb-0 md:items-start">
-             <Icon class="inline-block md:hidden" size={24} name="material-symbols:school-outline-rounded" />
-             <h2 class="font-medium category-title">{t('Resume-4')}</h2>
-           </div>
-           {
-             resume.education.map(education => (
-                 <div class="md:col-start-2 md:col-span-3 ">
-                   <h3 class="font-medium category-item-title">{education.title}</h3>
-                   <time class="font-mono work-tag text-primary-600">{education.time}</time>
-                   <p class="font-serif" set:html={education.description}></p>
-                 </div>
-               ))
-           }
-         </div>    
-         <hr class="border-b">
-         <!-- Skill -->
-         <div class="grid md:grid-cols-4 grid-cols-1">
-           <div class="flex items-center gap-2 pb-1 md:pb-0 md:items-start">
-             <Icon class="inline-block md:hidden" size={24} name="material-symbols:category-outline-rounded" />
-             <h2 class="font-medium category-title">{t('Resume-5')}</h2>
-           </div>
-   
-           <div class="col-span-3 flex gap-4">
-           {resume.skills.map((skill) => (
-             <Fragment>
-               {skill.developments && 
-                 <div class="w-full">
-                   <ul class="list-disc list-inside">
-                     {skill.developments && skill.developments.map(development => <li>{development}</li>)}
-                   </ul>
-                 </div>
-               }
-             </Fragment>
-             ))}
-           </div>
-         </div>
-   
-         <hr class="border-b">
-   
-         <!-- Links -->
-         <div class="grid md:grid-cols-4 grid-cols-1">
-           <div class="flex items-center gap-2 pb-1 md:pb-0 md:items-start">
-             <Icon class="inline-block md:hidden" size={24} name="material-symbols:link-rounded" />
-             <h2 class="font-medium category-title">{t('Resume-7')}</h2>
-           </div>
-   
-           <div class="col-span-3 flex gap-4">
-             <div>
-               <p class="inline-block mb-2 font-serif">{t('Resume-8')}</p>
-     
-               {resume.links.map((section) => (
-                   <ul class="list-inside list-disc">
-                     {section.mySite.map(site => 
-                     <li>
-                       {site.title}
-                       <a class="underline" href={site.link}>{site.link}</a>
-                     </li>)}
-                   </ul>
-                 ))}
-   
-               <!-- Socials -->
-               <ul class="list-disc list-inside">
-                 {
-                   resume.personalInfo.socialLinks.map(link => {
-                     const stripedEmailToUrl = link.url.replace(/^mailto:/, '')
-                     return (
-                     <li>
-                       {link.name}: 
-                       <a class="underline" title={link.name} href={link.url}>{stripedEmailToUrl}</a>
-                     </li>  
-                   )
-                   })
-                 }
-               </ul>
-   
-               <!-- QRCodes -->
-               <ul class="flex gap-4 flex-wrap text-center mt-4">
-                 {resume.links.map((section) => (
-                   section.mySite.map(async (site) => {
-                     const qrCodeUrl = await QRCode.toDataURL(site.link, {
-                       width: 80,
-                       margin: 0,
-                       errorCorrectionLevel: 'L'
-                     })
-   
-                     const stripedColonTitle = site.title.replace(/\s*[:：]\s*$/, "");
-   
-   
-                     return <li style="width: 100px;">
-                     <img width="80" height="80" class="inline" src={qrCodeUrl} alt={`${qrCodeUrl} QRCode`} />
-                     <span class="text-xs whitespace-nowrap">{stripedColonTitle}</span>
-                   </li>})
-                 ))}
-   
-                 {
-                   resume.personalInfo.socialLinks.map(async (link) => {
-                     const qrCodeUrl = await QRCode.toDataURL(link.url, {
-                       width: 80,
-                       margin: 0,
-                       errorCorrectionLevel: 'L'
-                     })
-   
-                     return (
-                     <li style="width: 100px;">
-                       <img width="80" height="80" class="inline" src={qrCodeUrl} alt={`${link.name} QRCode`} />
-                       <span class="text-xs whitespace-nowrap">{link.name}</span>
-                     </li>
-                   )
-                   })
-                 }
-               </ul>
-             </div>
-           </div>
-         </div>
-         
-         <hr class="border-b">
-   
-         <div class="text-xs flex flex-wrap gap-2 justify-between">
-           <p>{t('Resume-9')}</p>
-           <p class="font-mono text-right whitespace-nowrap">
-             {t('Resume-10')}{currentTime}</p>
-         </div>
-       </div>
+<div style="padding-top: var(--navbar-height)" class='pb-16 flex flex-col gap-8 md:gap-12'>
+  
+  <!-- Tab Toggle UI -->
+  <div class="sticky z-10 container mx-auto flex justify-center px-4 md:px-0 print:hidden" style="top: 1rem">
+    <div class="flex gap-2 p-1 bg-primary-100 rounded-full shadow-sm backdrop-blur-md bg-opacity-90">
+      <button 
+        id="tab-modern" 
+        class="resume-tab-btn cursor-pointer px-6 py-2 rounded-full text-sm font-medium transition-all hover:text-primary-900 bg-white shadow-sm text-primary-900"
+        onclick="switchResumeTab('modern')"
+      >
+        {t('Modern')}
+      </button>
+      <button 
+        id="tab-traditional" 
+        class="resume-tab-btn cursor-pointer px-6 py-2 rounded-full text-sm font-medium transition-all text-primary-600 hover:text-primary-900"
+        onclick="switchResumeTab('traditional')"
+      >
+        {t('Traditional')}
+      </button>
+    </div>
+  </div>
+
+  <!-- Resume Containers -->
+  <div id="resume-wrapper">
+    <div id="resume-modern" class="resume-content">
+      <ModernResume {resume} />
+    </div>
+    
+    <div id="resume-traditional" class="resume-content hidden print:hidden">
+      <TraditionalResume {resume} />
     </div>
   </div>
 
@@ -268,100 +56,46 @@ export function getStaticPaths() {
     <span class="md:text-2xl text-xl font-medium">{t('Resume-6')}</span>
   </button>
 
-
 </div>
 </Base>
-  
+
+<script is:inline>
+  /* eslint-disable no-unused-vars */
+  function switchResumeTab(tab) {
+    const btnModern = document.getElementById('tab-modern');
+    const btnTrad = document.getElementById('tab-traditional');
+    const contentModern = document.getElementById('resume-modern');
+    const contentTrad = document.getElementById('resume-traditional');
+    
+    // For primary Tailwind colors used in base site
+    const activeClasses = ['bg-white', 'shadow-sm', 'text-primary-900'];
+    const inactiveTextClass = 'text-primary-600';
+    
+    if (tab === 'modern') {
+      btnModern.classList.add(...activeClasses);
+      btnModern.classList.remove(inactiveTextClass);
+      
+      btnTrad.classList.remove(...activeClasses);
+      btnTrad.classList.add(inactiveTextClass);
+      
+      contentModern.classList.remove('hidden', 'print:hidden');
+      contentTrad.classList.add('hidden', 'print:hidden');
+    } else {
+      btnTrad.classList.add(...activeClasses);
+      btnTrad.classList.remove(inactiveTextClass);
+      
+      btnModern.classList.remove(...activeClasses);
+      btnModern.classList.add(inactiveTextClass);
+      
+      contentTrad.classList.remove('hidden', 'print:hidden');
+      contentModern.classList.add('hidden', 'print:hidden');
+    }
+  }
+</script>
+
 <style is:inline>
   body {
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/print-color-adjust */
     print-color-adjust: exact;
-  }
-  
-  .a4 .name {
-    font-size: 1.6rem;
-  }
-
-  .a4 .quote {
-    padding-left: 3ch;
-    font-size: 1.2rem;
-  }
-
-  .a4 .quote::before {
-    position:absolute;
-    top: 0;
-    left: 0;
-    display:inline-block;
-    content: '';
-    top:.2em;
-    width: 16px;
-    height: 16px;
-    opacity: 0.4;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M3.691 6.292C5.094 4.771 7.217 4 10 4h1v2.819l-.804.161c-1.37.274-2.323.813-2.833 1.604A2.902 2.902 0 0 0 6.925 10H10a1 1 0 0 1 1 1v7c0 1.103-.897 2-2 2H3a1 1 0 0 1-1-1v-5l.003-2.919c-.009-.111-.199-2.741 1.688-4.789M20 20h-6a1 1 0 0 1-1-1v-5l.003-2.919c-.009-.111-.199-2.741 1.688-4.789C16.094 4.771 18.217 4 21 4h1v2.819l-.804.161c-1.37.274-2.323.813-2.833 1.604A2.902 2.902 0 0 0 17.925 10H21a1 1 0 0 1 1 1v7c0 1.103-.897 2-2 2'/%3E%3C/svg%3E");
-  }
-
-  .a4 .category-title {
-    font-size: 1.4rem;
-  }
-
-  .a4 .category-item-title {
-    font-size: 1rem;
-  }
-
-  @media (width >= 48rem) {
-    .a4 .category-item-title {
-      font-size: 1.4rem;
-    }
-  }
-
-  .a4 .work-tag {
-    font-size: 0.8rem;
-  }
-
-  .a4 {
-    max-width: 21cm;
-    max-height: auto;
-    padding: 1cm;
-    overflow: auto;
-  }
-
-  .a4::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1cm;
-    background: linear-gradient(to bottom,white, transparent);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .a4::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1cm;
-    background: linear-gradient(to top,white, transparent);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  @media (width >= 48rem) {
-    .a4 {
-      max-height: 29.7cm;
-    }
-  }
-
-  @media print {
-    .a4 {
-      overflow: visible;
-    }
-
-    .a4::before, .a4::after {
-      display: none;
-    }
   }
 </style>
