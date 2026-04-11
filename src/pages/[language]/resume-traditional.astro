@@ -1,0 +1,220 @@
+---
+import Base from '@/layouts/Base.astro';
+import { Icon } from 'astro-icon/components';
+import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { getEntry } from 'astro:content';
+
+const currentLocale = Astro.currentLocale as LanguageKey;
+const t = useTranslations(currentLocale as LanguageKey);
+const resume = (await getEntry('resume', currentLocale))?.data;
+if (!resume) throw new Error('Resume Data is not found')
+const currentTime = new Date()
+  .toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
+  .replace(/\//g, '-');
+
+type Achievement = string | Achievement[];
+function renderAchievements(list: Achievement): string {
+  if (!Array.isArray(list)) {
+    return `<li>${list}</li>`;
+  }
+  return list
+    .map((item) => {
+      if (Array.isArray(item)) {
+        return `<ul style="padding-left: 1.2em; list-style-type: circle;" class="list-inside">${renderAchievements(item)}</ul>`
+      }
+      return `<li>${item}</li>`
+    })
+    .join("")
+}
+  
+export function getStaticPaths() {
+  return Object.keys(languages).map((language) => ({
+    params: { language },
+  }));
+}
+---
+<Base title={t('Resume-1')}>
+<div style="padding-top: var(--navbar-height)" class='pb-16 flex flex-col gap-6 md:gap-12'>
+  <div class="container mx-auto flex justify-center px-4 md:px-0">
+    <div class="cv-traditional bg-white shadow-xl print:shadow-none font-sans text-gray-900 leading-snug text-sm">
+      
+      <!-- Header -->
+      <header class="text-center border-b-2 border-current pb-4 mb-4">
+        <h1 class="text-2xl md:text-3xl font-bold uppercase tracking-wider mb-2">{resume.personalInfo.name}</h1>
+        
+        <div class="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 text-xs">
+          {resume.personalInfo.socialLinks.map((link, index) => (
+            <div class="flex items-center gap-1">
+              {index > 0 && <span class="text-gray-400 hidden sm:inline mr-2">•</span>}
+              <Icon size={12} name={link.icon} class="text-gray-700 flex-shrink-0" />
+              <a href={link.url} class="hover:underline text-gray-700" title={link.name}>
+                {link.url.replace(/^mailto:/, '').replace(/^https?:\/\//, '').replace(/\/$/, '')}
+              </a>
+            </div>
+          ))}
+        </div>
+      </header>
+
+      <!-- Summary / Quote -->
+      {resume.personalInfo.description && (
+        <section class="mb-5 font-serif text-xs">
+          <div set:html={resume.personalInfo.description}></div>
+        </section>
+      )}
+
+      <!-- Work Experience -->
+      <section class="mb-5">
+        <h2 class="text-sm font-bold uppercase border-b border-current mb-3 pb-1 tracking-widest text-gray-900">{t('Resume-2')}</h2>
+        <div class="space-y-4">
+          {resume.workExperience.map(experience => (
+            <div>
+              <div class="flex flex-col gap-2 sm:flex-row sm:justify-between items-start sm:items-baseline mb-1.5">
+                <div class="text-sm">
+                  <span class="font-bold text-gray-900">{experience.title}</span>
+                  <span class="text-gray-500 mx-1">-</span>
+                  <span class="font-semibold text-gray-800">
+                    <a class="hover:underline" href={experience.company.link}>{experience.company.name}</a>
+                  </span>
+                </div>
+                <span class="text-xs text-gray-600 font-medium whitespace-nowrap mt-0.5 sm:mt-0">{experience.time}</span>
+              </div>
+              <ul class="font-serif list-disc list-outside ml-5 text-xs space-y-1 text-gray-800" set:html={renderAchievements(experience.achievements)}>
+              </ul>
+              {experience.techs && experience.techs.length > 0 && (
+                <div class="text-xs text-gray-600 mt-1.5">
+                  <span class="font-semibold text-gray-700">{t('Resume-5') ? 'Tech' : 'Tech'}:</span> {experience.techs.join(', ')}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="mb-5">
+        <h2 class="text-sm font-bold uppercase border-b border-current mb-3 pb-1 tracking-widest text-gray-900">{t('Resume-4')}</h2>
+        <div class="space-y-3">
+          {resume.education.map(education => (
+            <div>
+              <div class="flex flex-col gap-2 sm:flex-row sm:justify-between items-start sm:items-baseline mb-0.5">
+                <h3 class="text-sm font-bold text-gray-900">{education.title}</h3>
+                <span class="text-xs text-gray-600 font-medium whitespace-nowrap">{education.time}</span>
+              </div>
+              <div class="text-xs text-gray-800" set:html={education.description}></div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="mb-5">
+        <h2 class="text-sm font-bold uppercase border-b border-current mb-3 pb-1 tracking-widest text-gray-900">{t('Resume-5')}</h2>
+        <div class="text-xs text-gray-800">
+          <ul class="list-disc list-outside ml-5 space-y-1">
+            {resume.skills.map((skill) => (
+              <Fragment>
+                {skill.developments && skill.developments.map(development => 
+                  <li>{development}</li>
+                )}
+              </Fragment>
+            ))}
+          </ul>
+        </div>
+      </section>
+      
+      <!-- Achievements -->
+      {resume.achievements && resume.achievements.length > 0 && (
+        <section class="mb-5">
+          <h2 class="text-sm font-bold uppercase border-b border-current mb-3 pb-1 tracking-widest text-gray-900">{t('Resume-3')}</h2>
+          <div class="space-y-2">
+            {resume.achievements.map(achievement => (
+              <div class="flex flex-col gap-1 sm:justify-between items-start sm:items-baseline">
+                <h3 class="text-xs font-bold text-gray-900">{achievement.title}</h3>
+                <div class="text-xs text-gray-700">
+                  <a class="hover:underline" href={achievement.url}>
+                    {achievement.subtitle}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Links -->
+      {resume.links && resume.links.length > 0 && (
+        <section class="mb-5">
+          <h2 class="text-sm font-bold uppercase border-b border-current mb-3 pb-1 tracking-widest text-gray-900">{t('Resume-7')}</h2>
+          <div class="text-xs text-gray-800">
+            {resume.links.map((section) => (
+              <ul class="list-disc list-outside ml-5 space-y-1">
+                {section.mySite && section.mySite.map(site => (
+                  <li>
+                    <span class="font-semibold">{site.title.replace(/\s*[:：]\s*$/, "")}:</span>{' '}
+                    <a class="hover:underline text-gray-700" href={site.link}>{site.link}</a>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Footer / Print Date -->
+      <div class="mt-8 text-xs text-gray-400 flex justify-between border-t border-gray-200 pt-3 print:hidden">
+        <p>{t('Resume-9')}</p>
+        <p>{t('Resume-10')} {currentTime}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <button type="button" onclick="window.print()" class="cursor-pointer print:hidden flex border rounded-full transition-colors md:p-8 p-4 flex-wrap justify-center items-center gap-4 hover:bg-primary-800 hover:text-white mx-auto">
+    <Icon size={48} name="material-symbols:sim-card-download-outline-rounded" />
+    <span class="md:text-2xl text-xl font-medium">{t('Resume-6')}</span>
+  </button>
+</div>
+</Base>
+  
+<style is:inline>
+  body {
+    print-color-adjust: exact;
+  }
+  
+  .cv-traditional {
+    width: 21cm;
+    max-width: 100%;
+    min-height: 29.7cm;
+    padding: 1.2cm 1.5cm;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .cv-traditional a {
+    color: inherit;
+  }
+  
+  .cv-traditional a:hover {
+    text-decoration: underline;
+  }
+
+  @media print {
+    .cv-traditional {
+      box-shadow: none;
+      padding: 0;
+      width: 100%;
+      min-height: auto;
+    }
+    
+    @page {
+      size: A4;
+      margin: 1.2cm 1.5cm;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cv-traditional {
+      padding: 1.5rem;
+    }
+  }
+</style>
