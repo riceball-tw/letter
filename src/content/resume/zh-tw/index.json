@@ -1,0 +1,165 @@
+{
+  "personalInfo": {
+    "name": "王小明",
+    "role": "網頁開發",
+    "description": "我經營<a href=\"#\" class=\"underline text-primary-900\">網頁技術部落格累計共上百篇文章</a>並透過<a href=\"#\" class=\"underline text-primary-900\">技術自媒體</a>發掘各式有趣的網頁相關議題，例如：<span class=\"text-primary-900\">設計、UI、UX、網頁開發與測試……</span> 等領域都有涉略。",
+    "socialLinks": [
+      {
+        "name": "GitHub",
+        "icon": "simple-icons:github",
+        "url": "https://github.com/"
+      },
+      {
+        "name": "Email",
+        "icon": "simple-icons:gmail",
+        "url": "mailto:test@example.com"
+      },
+      {
+        "name": "LinkedIn",
+        "icon": "simple-icons:linkedin",
+        "url": "https://www.linkedin.com/"
+      },
+      {
+        "name": "Behance",
+        "icon": "simple-icons:behance",
+        "url": "https://www.behance.net/"
+      },
+      {
+        "name": "Threads",
+        "icon": "simple-icons:threads",
+        "url": "https://www.threads.com/"
+      }
+    ]
+  },
+  "workExperience": [
+    {
+      "title": "網頁前端工程師",
+      "company": {
+        "name": "不存在的股份有限公司",
+        "link": "https://example.com/"
+      },
+      "time": "2025/07 ~ 至今．在職",
+      "achievements": [
+        "獨立負責核心業務前端架構設計與開發，維持系統高可用性與擴展性",
+        "優化前端效能與首屏載入速度，將 Core Web Vitals 指標提升至優秀等級",
+        "導入自動化測試流程與 CI/CD 管道，顯著減少手動測試成本與回歸錯誤",
+        "參與技術選型與專案重構，解決舊有技術債並提升團隊開發效率",
+        "與後端、產品經理及設計師協作，定義技術規範與 API 介面標準",
+        "撰寫詳細的技術文檔與知識庫，推動團隊內部技術交流與經驗傳承"
+      ],
+      "techs": [
+        "Go Gin",
+        "MongoDB",
+        "Redis",
+        "TypeScript",
+        "Vite Vue3",
+        "TanStack Query",
+        "Pinia",
+        "Tailwind",
+        "Shadcn Vue",
+        "Vitest",
+        "Vue Test Utils"
+      ]
+    },
+    {
+      "title": "前端工程師",
+      "company": {
+        "name": "不存在的股份有限公司",
+        "link": "https://example.com/"
+      },
+      "time": "2023/10 ~ 2024/10．1 年",
+      "achievements": [
+        "優化專案架構，提升代碼複用率與維護效率",
+        "導入現代化前端框架，提升系統效能與安全性",
+        "建立標準化元件庫，加速產品開發週期",
+        "設計並實作 CI/CD 流程，實現自動化測試與部署",
+        "撰寫自動化測試腳本，確保核心功能之穩定性",
+        "參與資安漏洞檢測與修復建議"
+      ],
+      "techs": [
+        "Nx Monorepo",
+        "TypeScript",
+        "Nuxt 3",
+        "Pinia",
+        "Tailwind",
+        "Shadcn Vue",
+        "Cypress",
+        "Cucumber",
+        "Vitest",
+        "Git Flow",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "title": "前端助教",
+      "company": {
+        "name": "不存在的股份有限公司",
+        "link": "https://example.com/"
+      },
+      "time": "2022/07 ~ 2023/07．1 年",
+      "achievements": [
+        "協助指導學員解決前端開發相關技術難題",
+        "參與撰寫網頁開發課程教材與實作範例",
+        "撰寫技術部落格文章，分享開發經驗與知識"
+      ],
+      "techs": ["React", "Vue", "jQuery", "Bootstrap", "Sass"]
+    },
+    {
+      "title": "網頁設計開發自由工作者",
+      "company": {
+        "name": "不存在的股份有限公司",
+        "link": "https://example.com/"
+      },
+      "time": "2020/03 ~ 2020/05．3 個月",
+      "achievements": ["負責多個品牌活動網頁之視覺設計與前端實作"],
+      "techs": ["Sass", "Bootstrap"]
+    }
+  ],
+  "achievements": [
+    {
+      "title": "某年度技術徵文比賽 - 入選",
+      "subtitle": "撰寫系列技術文章分享開發實務心得",
+      "url": "https://example.com/"
+    }
+  ],
+  "education": [
+    {
+      "title": "某國立大學．資訊設計系學士畢業",
+      "time": "2019/09 ~ 2023/06",
+      "description": "於在校期間積極參與產學合作專案，並負責多項專案之網頁設計與前端開發工作。"
+    }
+  ],
+  "skills": [
+    {
+      "developments": [
+        "UI：Figma、Illustrator、Photoshop",
+        "切版：BEM CSS、Sass、Bootstrap 5、Tailwind、Shadcn",
+        "前端：Nuxt 3（Vue）、Next 15（React）、Astro、jQuery",
+        "狀態管理：Pinia、Zustand",
+        "後端：Express、Go Gin、MongoDB、Cloudflare Workers",
+        "程式品質：ESLint、Prettier 與 TypeScript",
+        "程式測試：Vitest、Vue Test Utils、Playwright、Cypress",
+        "代碼管理：Git、GitLab、GitHub、Git Flow、GitHub Flow",
+        "DevOps：GitHub Actions、Docker"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "mySite": [
+        {
+          "title": "線上履歷：",
+          "link": "https://example.com/resume"
+        },
+        {
+          "title": "線上作品集：",
+          "link": "https://example.com/portfolio"
+        },
+        {
+          "title": "技術部落格：",
+          "link": "https://example.com/blog"
+        }
+      ]
+    }
+  ]
+}
