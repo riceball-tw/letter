@@ -35,3 +35,50 @@ heroVideo:
       type: video/webm
     - src: https://bucket-wei.webdong.dev/hero.mp4
       type: video/mp4
+techGroups:
+  - id: "Work-TechGroup-all"
+    relatedTechs: []
+    icon: "material-symbols:person-play-outline-rounded"
+    themeColor: "#171717"
+  - id: "Work-TechGroup-UserInterface"
+    relatedTechs:
+      - "Bootstrap"
+      - "Chart.js"
+      - "Daisy UI"
+      - "Framer Motion"
+      - "GSAP"
+      - "Shadcn UI"
+    icon: "material-symbols:layers-outline-rounded"
+    themeColor: "#5c038f"
+  - id: "Work-TechGroup-Vue"
+    relatedTechs:
+      - "Nuxt(Vue)"
+      - "Pinia"
+      - "Vue"
+      - "Vue Router"
+    icon: "mdi:vuejs"
+    themeColor: "#33a06f"
+  - id: "Work-TechGroup-React"
+    relatedTechs:
+      - "Next(React)"
+      - "React"
+      - "React Router"
+    icon: "mdi:react"
+    themeColor: "#087ea4"
+  - id: "Work-TechGroup-Testing"
+    relatedTechs:
+      - "Playwright"
+      - "Vitest"
+      - "Cypress"
+      - "Lighthouse CI"
+      - "Node.js Test Runner"
+      - "Go Test"
+    icon: "material-symbols:thermostat-rounded"
+    themeColor: "#608f03"
+  - id: "Work-TechGroup-Database"
+    relatedTechs:
+      - "Supabase(Postgres)"
+      - "MySQL"
+      - "Drizzle ORM"
+    icon: "material-symbols:database-outline"
+    themeColor: "#03118f"
