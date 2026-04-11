@@ -25,14 +25,14 @@ export function getStaticPaths() {
     <div class="flex gap-2 p-1 bg-primary-100 rounded-full shadow-sm backdrop-blur-md bg-opacity-90">
       <button 
         id="tab-modern" 
-        class="resume-tab-btn px-6 py-2 rounded-full text-sm font-medium transition-all hover:text-primary-900 bg-white shadow-sm text-primary-900"
+        class="resume-tab-btn cursor-pointer px-6 py-2 rounded-full text-sm font-medium transition-all hover:text-primary-900 bg-white shadow-sm text-primary-900"
         onclick="switchResumeTab('modern')"
       >
         {t('Modern')}
       </button>
       <button 
         id="tab-traditional" 
-        class="resume-tab-btn px-6 py-2 rounded-full text-sm font-medium transition-all text-primary-600 hover:text-primary-900"
+        class="resume-tab-btn cursor-pointer px-6 py-2 rounded-full text-sm font-medium transition-all text-primary-600 hover:text-primary-900"
         onclick="switchResumeTab('traditional')"
       >
         {t('Traditional')}
