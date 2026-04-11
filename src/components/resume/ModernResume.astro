@@ -1,10 +1,20 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
+import { useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
 // Only use qrcode in dev env
 // eslint-disable-next-line import/no-extraneous-dependencies
 import QRCode from 'qrcode'
 
-const { resume, t, currentTime } = Astro.props;
+interface Props {
+  resume: CollectionEntry<'resume'>['data'];
+}
+
+const { resume } = Astro.props;
+const t = useTranslations(Astro.currentLocale as LanguageKey);
+const currentTime = new Date()
+  .toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
+  .replace(/\//g, '-');
 
 type Achievement = string | Achievement[];
 function renderAchievements(list: Achievement): string {
