@@ -12,6 +12,7 @@ globalOgImage:
   type: image/jpeg
 website:
   name: WeiWeb
+  username: Joe
   email: bottle200918@gmail.com
   emojiStatus: 🍙
   globalBackgroundTextureImage: https://bucket-wei.webdong.dev/global/natural-paper.webp

@@ -7,7 +7,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getEntry } from 'astro:content';
 
 const config = await getEntry('config', 'site');
-const { heroVideo } = config!.data;
+const { heroVideo, website: { username } } = config!.data;
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
 export function getStaticPaths() {
@@ -21,7 +21,9 @@ export function getStaticPaths() {
   <main class="md:min-h-screen min-h-auto">
     <Banner>
       <h1 class="text-3xl md:text-6xl font-semibold px-4">
-        {t('Hero-Greeting')}<br/>
+        {t('Hero-Greeting', {
+          name: username
+        })}<br/>
         <Fragment set:html={t('Hero-Intro', {
           appsLink: `<a class="highlight" href="${getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/work')}">${t('Hero-Apps')}</a>`
         })} />

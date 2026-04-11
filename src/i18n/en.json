@@ -2,7 +2,7 @@
   "Debug-1": "Hello, World",
   "Debug-2": "Hello, {name}",
 
-  "Hero-Greeting": "Hi, I'm Riceball.",
+  "Hero-Greeting": "Hi, I'm {name}.",
   "Hero-Intro": "A web developer from Taiwan passionate about building {appsLink}!",
   "Hero-Apps": "engaging web apps",
   "Hero-BlogLink": "200+ blog articles",

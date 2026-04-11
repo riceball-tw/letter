@@ -114,6 +114,7 @@ export const collections = {
         }),
         website: z.object({
           name: z.string(),
+          username: z.string(),
           email: z.string(),
           emojiStatus: z.string(),
           globalBackgroundTextureImage: z.string(),
