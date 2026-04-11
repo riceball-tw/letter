@@ -28,7 +28,7 @@ export const GET: APIRoute = async () => {
           purpose: 'maskable',
         },
       ],
-      start_url: '/',
+      start_url: import.meta.env.BASE_URL,
       display: 'fullscreen',
       theme_color: '#15181a',
       background_color: '#f6f6f6',

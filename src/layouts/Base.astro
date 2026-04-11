@@ -47,7 +47,9 @@ const customTransition = {
 };
 
 function getPathnameWithoutLocale(pathname: string) {
-  return pathname.replace(`/${Astro.currentLocale}`, '').replace(/\/?$/, '/');
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const pathWithoutBase = base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+  return pathWithoutBase.replace(`/${Astro.currentLocale}`, '').replace(/\/?$/, '/');
 }
 ---
 
@@ -81,12 +83,13 @@ function getPathnameWithoutLocale(pathname: string) {
     }}
     extend={{
       link: [
-        { rel: 'manifest', href: '/manifest.webmanifest' },
+        { rel: 'manifest', href: `${import.meta.env.BASE_URL}/manifest.webmanifest`.replace(/\/+/, '/') },
           // Default Language Alternates
           {
             rel: "alternate",
             hreflang: "x-default",
             href: new URL(
+              import.meta.env.BASE_URL +
               defaultLocale + 
             getPathnameWithoutLocale(Astro.url.pathname) ,
               Astro.site
@@ -101,7 +104,9 @@ function getPathnameWithoutLocale(pathname: string) {
             return ({
             rel: "alternate",
             hreflang: tag,
-            href: new URL(regionMap[tag] + getPathnameWithoutLocale(Astro.url.pathname),
+            href: new URL(
+              import.meta.env.BASE_URL +
+              regionMap[tag] + getPathnameWithoutLocale(Astro.url.pathname),
               Astro.site
             ).toString()
           })}),
@@ -110,9 +115,11 @@ function getPathnameWithoutLocale(pathname: string) {
           ...Object.keys(languageTags).map(tag => ({
             rel: "alternate",
             hreflang: tag,
-            href: new URL(prefixDefaultLocale 
+            href: new URL(
+              import.meta.env.BASE_URL +
+              (prefixDefaultLocale 
                 ? tag + getPathnameWithoutLocale(Astro.url.pathname) 
-                : Astro.url.pathname,
+                : Astro.url.pathname),
               Astro.site
             ).toString()
           })),
