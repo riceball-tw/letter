@@ -93,7 +93,7 @@ function renderAchievements(list: Achievement): string {
                 <h3 class="text-sm font-bold text-gray-900">{education.title}</h3>
                 <span class="text-xs text-gray-600 font-medium whitespace-nowrap">{education.time}</span>
               </div>
-              <div class="text-xs text-gray-800" set:html={education.description}></div>
+              <div class="font-serif text-xs text-gray-800" set:html={education.description}></div>
             </div>
           ))}
         </div>
