@@ -1,8 +1,10 @@
 ---
+import { getEntry } from 'astro:content';
 import { defaultLocale, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { website } from '@/utility/config.ts'
 
+const config = await getEntry('config', 'site');
+const { website } = config!.data;
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 ---
 

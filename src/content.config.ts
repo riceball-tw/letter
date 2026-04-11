@@ -97,4 +97,41 @@ export const collections = {
       ),
     }),
   }),
+  config: defineCollection({
+    loader: glob({ pattern: '**/[^_]*.json', base: './src/content/config' }),
+    schema: z
+      .object({
+        favicons: z.record(z.string(), z.string()),
+        globalOgImage: z.object({
+          url: z.string(),
+          height: z.number(),
+          width: z.number(),
+          type: z.string(),
+        }),
+        website: z.object({
+          name: z.string(),
+          email: z.string(),
+          emojiStatus: z.string(),
+          globalBackgroundTextureImage: z.string(),
+          globalHighlightTextureImage: z.string(),
+          socials: z.array(
+            z.object({
+              name: z.string(),
+              url: z.string(),
+            }),
+          ),
+        }),
+      })
+      .transform((data) => ({
+        ...data,
+        website: {
+          ...data.website,
+          get copyright() {
+            return `© ${new Date().getFullYear()} ${
+              data.website.name
+            } All rights reserved. Theme <a class="underline" href='https://github.com/riceball-tw/letter'>Letter</a> licensed under MIT.`;
+          },
+        },
+      })),
+  }),
 };

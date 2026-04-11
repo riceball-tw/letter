@@ -1,16 +1,32 @@
 import type { APIRoute } from 'astro';
-import { favicons } from '@/utility/config.ts';
+import { getEntry } from 'astro:content';
 
 // https://web.dev/articles/add-manifest
 // eslint-disable-next-line import/prefer-default-export
-export const GET: APIRoute = () =>
-  new Response(
+export const GET: APIRoute = async () => {
+  const config = await getEntry('config', 'site');
+  const { favicons } = config!.data;
+
+  return new Response(
     JSON.stringify({
       name: "Wei's Website",
       icons: [
-        { src: favicons['android-chrome-192'], type: 'image/png', sizes: '192x192' },
-        { src: favicons['android-chrome-512'], type: 'image/png', sizes: '512x512' },
-        { src: favicons['512'], type: 'image/png', sizes: '512x512', purpose: 'maskable' },
+        {
+          src: favicons['android-chrome-192'],
+          type: 'image/png',
+          sizes: '192x192',
+        },
+        {
+          src: favicons['android-chrome-512'],
+          type: 'image/png',
+          sizes: '512x512',
+        },
+        {
+          src: favicons['512'],
+          type: 'image/png',
+          sizes: '512x512',
+          purpose: 'maskable',
+        },
       ],
       start_url: '/',
       display: 'fullscreen',
@@ -18,3 +34,4 @@ export const GET: APIRoute = () =>
       background_color: '#f6f6f6',
     }),
   );
+};

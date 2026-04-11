@@ -1,10 +1,13 @@
 ---
 import { SEO } from 'astro-seo';
 import '@/styles/global.css';
+import { getEntry } from 'astro:content';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import { regionTags, useTranslations, type LanguageKey, languageTags, defaultLocale, prefixDefaultLocale } from '@/i18n/i18n.ts';
-import { favicons, globalOgImage, website } from '@/utility/config.ts';
+
+const config = await getEntry('config', 'site');
+const { favicons, globalOgImage, website } = config!.data;
 import { ClientRouter } from "astro:transitions";
 
 const t = useTranslations(Astro.currentLocale as LanguageKey);
