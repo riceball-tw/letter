@@ -1,16 +1,7 @@
 ---
-import Base from '@/layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
-import { getEntry } from 'astro:content';
 
-const currentLocale = Astro.currentLocale as LanguageKey;
-const t = useTranslations(currentLocale as LanguageKey);
-const resume = (await getEntry('resume', currentLocale))?.data;
-if (!resume) throw new Error('Resume Data is not found')
-const currentTime = new Date()
-  .toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
-  .replace(/\//g, '-');
+const { resume, t, currentTime } = Astro.props;
 
 type Achievement = string | Achievement[];
 function renderAchievements(list: Achievement): string {
@@ -26,15 +17,7 @@ function renderAchievements(list: Achievement): string {
     })
     .join("")
 }
-  
-export function getStaticPaths() {
-  return Object.keys(languages).map((language) => ({
-    params: { language },
-  }));
-}
 ---
-<Base title={t('Resume-1')}>
-<div style="padding-top: var(--navbar-height)" class='pb-16 flex flex-col gap-6 md:gap-12'>
   <div class="container mx-auto flex justify-center px-4 md:px-0">
     <div class="cv-traditional bg-white shadow-xl print:shadow-none font-sans text-gray-900 leading-snug text-sm">
       
@@ -168,14 +151,6 @@ export function getStaticPaths() {
 
     </div>
   </div>
-
-  <button type="button" onclick="window.print()" class="cursor-pointer print:hidden flex border rounded-full transition-colors md:p-8 p-4 flex-wrap justify-center items-center gap-4 hover:bg-primary-800 hover:text-white mx-auto">
-    <Icon size={48} name="material-symbols:sim-card-download-outline-rounded" />
-    <span class="md:text-2xl text-xl font-medium">{t('Resume-6')}</span>
-  </button>
-</div>
-</Base>
-  
 <style is:inline>
   body {
     print-color-adjust: exact;
