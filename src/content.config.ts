@@ -98,7 +98,7 @@ export const collections = {
     }),
   }),
   config: defineCollection({
-    loader: glob({ pattern: '**/[^_]*.json', base: './src/content/config' }),
+    loader: glob({ pattern: '**/[^_]*.{yaml,yml}', base: './src/content/config' }),
     schema: z
       .object({
         favicons: z.record(z.string(), z.string()),
