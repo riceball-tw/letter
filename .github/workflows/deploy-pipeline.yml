@@ -6,6 +6,9 @@ on:
   repository_dispatch:
     types: [content-updated]
 
+env:
+  BASE_URL: ${{ vars.PUBLIC_BASE_URL }}
+
 jobs:
   # ESLint + Prettier
   lint:
