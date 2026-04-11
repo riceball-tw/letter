@@ -27,3 +27,10 @@ website:
       url: https://www.behance.net/riceballwei
     - name: CakeResume
       url: https://www.cakeresume.com/me/Riceball-wei
+heroVideo:
+  poster: https://bucket-wei.webdong.dev/hero-blur.webp
+  sources:
+    - src: https://bucket-wei.webdong.dev/hero.webm
+      type: video/webm
+    - src: https://bucket-wei.webdong.dev/hero.mp4
+      type: video/mp4

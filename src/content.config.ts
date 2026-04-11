@@ -108,6 +108,10 @@ export const collections = {
           width: z.number(),
           type: z.string(),
         }),
+        heroVideo: z.object({
+          poster: z.string(),
+          sources: z.array(z.object({ src: z.string(), type: z.string() })),
+        }),
         website: z.object({
           name: z.string(),
           email: z.string(),

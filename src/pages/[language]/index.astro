@@ -4,7 +4,10 @@ import Banner from '@/components/Banner.astro';
 import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
 import { defaultLocale } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getEntry } from 'astro:content';
 
+const config = await getEntry('config', 'site');
+const { heroVideo } = config!.data;
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
 export function getStaticPaths() {
@@ -33,9 +36,10 @@ export function getStaticPaths() {
     <section class="mb-16">
       <h2 class="sr-only">{t('NewestWork-1')}</h2>
       <div style="background-color: black;" class="aspect-video flex justify-center mx-4 rounded-lg">
-        <video class="w-full h-full" width="720" height="540" autoplay loop muted playsinline poster="https://bucket-wei.webdong.dev/hero-blur.webp">
-          <source src="https://bucket-wei.webdong.dev/hero.webm" type="video/webm" />
-          <source src="https://bucket-wei.webdong.dev/hero.mp4" type="video/mp4" />
+        <video class="w-full h-full" width="720" height="540" autoplay loop muted playsinline poster={heroVideo.poster}>
+          {heroVideo.sources.map((source: { src: string; type: string }) => (
+            <source src={source.src} type={source.type} />
+          ))}
         </video>
       </div>
     </section>
