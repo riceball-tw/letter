@@ -7,7 +7,9 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getEntry } from 'astro:content';
 
 const config = await getEntry('config', 'site');
-const { heroVideo, website: { username } } = config!.data;
+const { heroVideo, website: { username, socials } } = config!.data;
+const blogSocial = socials.find(s => s.name === 'Blog');
+const blogUrl = blogSocial && blogSocial.url ? `${blogSocial.url}/${Astro.currentLocale}` : '';
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
 export function getStaticPaths() {
@@ -29,7 +31,7 @@ export function getStaticPaths() {
         })} />
         
         <Fragment set:html={t('Hero-CTA', {
-          articlesLink: `<a class="highlight" href="https://www.webdong.dev/${Astro.currentLocale}">${t('Hero-BlogLink')}</a>`,
+          articlesLink: `<a class="highlight" href="${blogUrl}">${t('Hero-BlogLink')}</a>`,
           resumeLink: `<a class="highlight" href="${getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/resume')}">${t('Hero-Resume')}</a>`
         })} />
       </h1>
