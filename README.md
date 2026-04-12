@@ -44,6 +44,7 @@ pnpm run dev
 
 You might want to replace the demo content from these places:
 
+- `astro.config.mjs`: Astro config (IMPORTANT: Set site url property with your own domain)
 - `/public`: Assets used in the site (logo.svg, favicon...)
 - `/src/content`: Site config, projects, resume and faq content (Replace with your own content!)
 - `/src/styles/global.css`: CSS configs. (Tweak in your own style!)
