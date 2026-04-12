@@ -9,15 +9,23 @@ import { languages, prefixDefaultLocale, defaultLocale } from './src/i18n/i18n.t
 // https://docs.astro.build/en/guides/environment-variables/#in-the-astro-config-file
 const { BASE_URL } = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
 
+// Sanitize the BASE_URL from environment variables to ensure it starts and ends with a slash.
+// This avoids double slashes or missing slashes which can cause build errors or invalid URLs.
+// e.g., if BASE_URL is 'letter', finalBase becomes '/letter/'
+const finalBase = BASE_URL
+  ? `/${BASE_URL}/`.replace(/\/{2,}/g, '/')
+  : '/';
+
 // https://astro.build/config
 export default defineConfig({
   redirects: {
-    '/': `/${BASE_URL}${defaultLocale}/`,
-    '/resume/': `/${BASE_URL}${defaultLocale}/resume/`,
-    '/work/': `/${BASE_URL}${defaultLocale}/work/`,
-    '/faq/': `/${BASE_URL}${defaultLocale}/faq/`,
+    '/': `${finalBase}${defaultLocale}/`,
+    '/resume/': `${finalBase}${defaultLocale}/resume/`,
+    '/work/': `${finalBase}${defaultLocale}/work/`,
+    '/faq/': `${finalBase}${defaultLocale}/faq/`,
   },
-  ...(BASE_URL ? { base: BASE_URL } : {}),
+  // Set the base URL for the site. Default is '/'.
+  base: finalBase,
   prefetch: {
     prefetchAll: true,
   },
