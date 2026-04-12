@@ -1,22 +1,29 @@
+<div align="center">
+  <img alt="logo" src="./public/assets/global/logo.svg#gh-light-mode-only" width="70" />
+  <img alt="logo" src="./public/assets/global/logo-light.svg#gh-dark-mode-only" width="70" />
+</div>
+<h1 align="center">
+  Letter Portfolio
+</h1>
 
-# [Letter](https://weweweb.pages.dev/en) - Astro Portfolio Theme
+<div align="center">
+  Personal portfolio that is built for digital creatives
+</div>
 
-> Compose Your Digital Story, Letter by Letter
+<br />
 
-![Letter Theme Demo](https://bucket-wei.webdong.dev/readme/letter-demo.webp)
+![Letter Theme Preview](./public/assets/global/preview.jpg)
 
-**Letter** is a simple opinionated theme designed for developers and digital creatives, focus on simplicity and easy to use. Share your [online resume](https://weweweb.pages.dev/en/resume/) or [portfolio](https://weweweb.pages.dev/en/work/) even [FAQ](https://weweweb.pages.dev/en/faq/) through fully typed markdown. Since I am a frontend developer, why not create a portfolio website myself? 
-
-- [Let's Build a Personal Frontend Portfolio - Preparation](https://www.webdong.dev/en/post/lets-build-a-portfolio/)
-- [Let's Building a Frontend Portfolio using Astro.js](https://www.webdong.dev/en/post/lets-build-a-portfolio-with-astro/)
+Start your online [resume](https://riceball-tw.github.io/letter/en/resume/) or [projects](https://riceball-tw.github.io/letter/en/work/) or even [FAQ](https://riceball-tw.github.io/letter/en/faq/) through fully typed markdown and settings.
   
 ## Key Features
 
 - Astro v6 + Tailwind v4
-- Optimize for speed and easy to use, no frameworks
+- Optimize for speed (100% lighthouse score)
+- Responsive & SEO-friendly
 - Built-in i18n
 - CI pipeline (ESLint + Prettier + TS Typecheck + Lighthouse)
-- CD pipeline ([Cloudflare Pages](https://pages.cloudflare.com/))
+- CD pipeline ([Cloudflare Pages](https://pages.cloudflare.com/) or [GitHub Pages](https://pages.github.com/))
 
 ## Getting Started
 
@@ -33,6 +40,19 @@ pnpm install
 pnpm run dev
 ```
 
+## Customization
+
+You might want to replace the demo content from these places:
+
+- `/public`: Stores all the assets used in the site (logo.svg, favicon...)
+- `/src/content`: Stores all the data like site config, projects, resume and faq content (Replace with your own content!)
+- `/src/styles/global.css`: Tailwind CSS and CSS variables configs to customize the colors of the theme. (Tweak in your own style!)
+- `/src/i18n`: Translation used in astro template
+- `/.github/workflows/deploy-pipeline.yml`: GitHub CI/CD pipeline (You should setup env below)
+  - `LHCI_GITHUB_APP_TOKEN`, `LHCI_TOKEN`: For lighthouse and GitHub integration
+  - `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`: For Cloudflare Wrangler CD Pipeline.
+  - `BASE_URL`: Prefix for every link and assets in website (Useful for GitHub Pages deployment that has no custom domain)
+
 ### Build
 
 ```bash
@@ -46,23 +66,10 @@ docker build -t <your-astro-image-name> .
 docker run -p <local-port>:<container-port> <your-astro-image-name>
 ```
 
-## Customization
-
-1. **Global Configs**: Edit the template's config file [`src/utility/config.ts`](https://github.com/riceball-tw/letter/blob/main/src/utility/config.ts).
-2. **Styles**: Edit the [`src/styles/global.css`](https://github.com/riceball-tw/letter/blob/main/src/styles/global.css) file. This file uses Tailwind CSS and CSS variables to customize the colors of the theme.
-3. **Page content**: Replace page content and layout for your liking. Like [homepage](https://github.com/riceball-tw/letter/blob/main/src/pages/%5Blanguage%5D/index.astro) .
-4. **i18n content**: Every i18n config and text will store in [i18n folder](https://github.com/riceball-tw/letter/tree/main/src/i18n).
-5. **CI/CD env**: 
-  - `LHCI_GITHUB_APP_TOKEN`, `LHCI_TOKEN` - For lighthouse and GitHub integration
-    - [Chcek Website Performance with Lighthouse CI in 3 Steps](https://www.webdong.dev/en/post/check-website-performance-with-lighthouse-ci/)
-    - [Monitor Website Performance by Self-Host Lighthouse Server](https://www.webdong.dev/en/post/build-a-personal-lighthouse-server/)
-  - `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` - For Cloudflare Wrangler CD Pipeline.
-
 ## Helping out
 
 For questions or support, please open an issue on GitHub.
 
 ## License
 
-The source code in this repository is licensed under the MIT License.
-Non-code content (e.g., images, articles, documentation) is copyrighted and all rights are reserved.
+MIT
