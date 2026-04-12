@@ -91,9 +91,7 @@ function getPathnameWithoutLocale(pathname: string) {
             rel: "alternate",
             hreflang: "x-default",
             href: new URL(
-              import.meta.env.BASE_URL +
-              defaultLocale + 
-            getPathnameWithoutLocale(Astro.url.pathname) ,
+              resolveAsset(defaultLocale + getPathnameWithoutLocale(Astro.url.pathname)),
               Astro.site
             ).toString()
           },
@@ -107,8 +105,7 @@ function getPathnameWithoutLocale(pathname: string) {
             rel: "alternate",
             hreflang: tag,
             href: new URL(
-              import.meta.env.BASE_URL +
-              regionMap[tag] + getPathnameWithoutLocale(Astro.url.pathname),
+              resolveAsset(regionMap[tag] + getPathnameWithoutLocale(Astro.url.pathname)),
               Astro.site
             ).toString()
           })}),
@@ -118,10 +115,9 @@ function getPathnameWithoutLocale(pathname: string) {
             rel: "alternate",
             hreflang: tag,
             href: new URL(
-              import.meta.env.BASE_URL +
-              (prefixDefaultLocale 
-                ? tag + getPathnameWithoutLocale(Astro.url.pathname) 
-                : Astro.url.pathname),
+              prefixDefaultLocale 
+                ? resolveAsset(tag + getPathnameWithoutLocale(Astro.url.pathname)) 
+                : new URL(Astro.url.pathname, Astro.site).toString(),
               Astro.site
             ).toString()
           })),

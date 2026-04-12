@@ -63,7 +63,7 @@ export function useTranslations(targetLanguage?: LanguageKey) {
 }
 
 function removeLanguagePrefix(path: string, languagePrefixes: string[]): string {
-  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
+  const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
   const pathWithoutBase = path.startsWith(base) ? path.slice(base.length) : path;
   const prefixRegex = new RegExp(`^/(${languagePrefixes.join('|')})`);
   return pathWithoutBase.replace(prefixRegex, '').replace(/^\/+/, '');
