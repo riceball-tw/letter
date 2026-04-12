@@ -2,6 +2,11 @@
   "Debug-1": "Hello, World",
   "Debug-2": "Hello, {name}",
 
+  "Head-1": "Page",
+  "Head-2": "Collection of {name}'s personal works",
+  "Head-3": "Hello, I am {name}, a developer who is passionate about web development",
+  "Head-4": "Open Graph Image",
+
   "Hero-Greeting": "Hi, I'm {name}.",
   "Hero-Intro": "A web developer from Taiwan passionate about building {appsLink}!",
   "Hero-Apps": "engaging web apps",
@@ -47,10 +52,6 @@
   "LanguagePicker-1": "Select preferred language",
   "404-1": "Page not found",
   "404-2": "Go Home",
-  "Head-1": "Page",
-  "Head-2": "Collection of Tsuang Wei Huang's personal works",
-  "Head-3": "Hello, I am Tsuang Wei, I have been a self-taught Frontend Developer, also working as a teaching assistant and freelancer",
-  "Head-4": "An English handwriting with Wei's logo on a light white background",
   "Modern": "Modern",
   "Traditional": "Traditional"
 }

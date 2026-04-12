@@ -10,6 +10,7 @@ import { ClientRouter } from "astro:transitions";
 
 const config = await getEntry('config', 'site');
 const { favicons, globalOgImage, website } = config!.data;
+const { username } = website;
 
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
@@ -20,11 +21,11 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-const globalTitle = `${title || t('Head-1')} - ${t('Head-2')}`;
+const globalTitle = `${title || t('Head-1')} - ${t('Head-2', { name: username })}`;
 const globalDescription = `${
-  description || t('Head-3')
+  description || t('Head-3', { name: username })
 }`;
-const globalOgImageAlt = t('Head-4');
+const globalOgImageAlt = t('Head-4', { name: username });
 const currentLocale = Astro.currentLocale as LanguageKey;
 
 // Custom View Transition Animation
