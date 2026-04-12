@@ -1,0 +1,84 @@
+favicons:
+  "16": /assets/global/favicon/favicon-16x16.png
+  "32": /assets/global/favicon/favicon-32x32.png
+  "512": /assets/global/favicon/favicon-512x512.png
+  android-chrome-192: /assets/global/favicon/android-chrome-192x192.png
+  android-chrome-512: /assets/global/favicon/android-chrome-512x512.png
+  apple-touch-icon: /assets/global/favicon/apple-touch-icon.png
+globalOgImage:
+  url: https://bucket-wei.webdong.dev/global/og-image.jpg
+  height: 630
+  width: 1200
+  type: image/jpeg
+website:
+  name: Letter
+  username: Joe
+  email: example@example.com
+  emojiStatus: ✉️
+  globalBackgroundTextureImage: /assets/global/nature-paper.webp
+  globalHighlightTextureImage: /assets/global/highlight-texture.webp
+  socials:
+    - name: Blog
+      url: https://example.com/
+    - name: GitHub
+      url: https://example.com/
+    - name: Threads
+      url: https://example.com/
+    - name: Behance
+      url: https://example.com/
+    - name: CakeResume
+      url: https://example.com/
+heroVideo:
+  poster: /assets/global/hero.webp
+  sources:
+    - src: /assets/global/hero.webm
+      type: video/webm
+    - src: /assets/global/hero.mp4
+      type: video/mp4
+techGroups:
+  - id: "Work-TechGroup-all"
+    relatedTechs: []
+    icon: "material-symbols:person-play-outline-rounded"
+    themeColor: "#171717"
+  - id: "Work-TechGroup-UserInterface"
+    relatedTechs:
+      - "Bootstrap"
+      - "Chart.js"
+      - "Daisy UI"
+      - "Framer Motion"
+      - "GSAP"
+      - "Shadcn UI"
+    icon: "material-symbols:layers-outline-rounded"
+    themeColor: "#5c038f"
+  - id: "Work-TechGroup-Vue"
+    relatedTechs:
+      - "Nuxt(Vue)"
+      - "Pinia"
+      - "Vue"
+      - "Vue Router"
+    icon: "mdi:vuejs"
+    themeColor: "#33a06f"
+  - id: "Work-TechGroup-React"
+    relatedTechs:
+      - "Next(React)"
+      - "React"
+      - "React Router"
+    icon: "mdi:react"
+    themeColor: "#087ea4"
+  - id: "Work-TechGroup-Testing"
+    relatedTechs:
+      - "Playwright"
+      - "Vitest"
+      - "Cypress"
+      - "Lighthouse CI"
+      - "Node.js Test Runner"
+      - "Go Test"
+    icon: "material-symbols:thermostat-rounded"
+    themeColor: "#608f03"
+  - id: "Work-TechGroup-Database"
+    relatedTechs:
+      - "Supabase(Postgres)"
+      - "MySQL"
+      - "Drizzle ORM"
+    icon: "material-symbols:database-outline"
+    themeColor: "#03118f"

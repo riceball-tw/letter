@@ -2,7 +2,7 @@
 import LanguagePicker from '@/components/LanguagePicker.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { defaultLocale, useTranslations,prefixDefaultLocale,  type LanguageKey } from '@/i18n/i18n.ts';
-import Logo from '@/assets/logo.svg';
+import { resolveAsset } from '@/utils/paths.ts';
 
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
@@ -14,8 +14,10 @@ const links = [
 ];
 
 function isActiveNavItem(navItem: string) {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const { pathname } = new URL(Astro.url);
-  const currentPath = pathname.replace(/^\/|\/$/g, '');
+  const pathWithoutBase = base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+  const currentPath = pathWithoutBase.replace(/^\/|\/$/g, '');
   const localePrefix = prefixDefaultLocale ? Astro.currentLocale : '';
   const isHomepage = navItem === '/'
   const isDefaultLocaleActive = currentPath === localePrefix
@@ -34,7 +36,12 @@ function isActiveNavItem(navItem: string) {
     class="hover:bg-primary-100 p-4 -m-4 rounded-full aspect-square flex justify-center items-center transition-colors"
     href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/')}
   >
-    <Logo />
+      <img
+      width="40"
+      height="40"
+      src={resolveAsset('/assets/global/logo.svg')}
+      alt="Logo"
+    />
   </a>
 
   <div class="flex gap-2 items-center">

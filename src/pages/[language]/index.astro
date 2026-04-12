@@ -2,9 +2,15 @@
 import Base from '@/layouts/Base.astro';
 import Banner from '@/components/Banner.astro';
 import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { resolveAsset } from '@/utils/paths.ts';
 import { defaultLocale } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getEntry } from 'astro:content';
 
+const config = await getEntry('config', 'site');
+const { heroVideo, website: { username, socials } } = config!.data;
+const blogSocial = socials.find(s => s.name === 'Blog');
+const blogUrl = blogSocial && blogSocial.url ? `${blogSocial.url}/${Astro.currentLocale}` : '';
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
 export function getStaticPaths() {
@@ -18,13 +24,15 @@ export function getStaticPaths() {
   <main class="md:min-h-screen min-h-auto">
     <Banner>
       <h1 class="text-3xl md:text-6xl font-semibold px-4">
-        {t('Hero-Greeting')}<br/>
+        {t('Hero-Greeting', {
+          name: username
+        })}<br/>
         <Fragment set:html={t('Hero-Intro', {
           appsLink: `<a class="highlight" href="${getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/work')}">${t('Hero-Apps')}</a>`
         })} />
         
         <Fragment set:html={t('Hero-CTA', {
-          articlesLink: `<a class="highlight" href="https://www.webdong.dev/${Astro.currentLocale}">${t('Hero-BlogLink')}</a>`,
+          articlesLink: `<a class="highlight" href="${blogUrl}">${t('Hero-BlogLink')}</a>`,
           resumeLink: `<a class="highlight" href="${getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/resume')}">${t('Hero-Resume')}</a>`
         })} />
       </h1>
@@ -33,9 +41,10 @@ export function getStaticPaths() {
     <section class="mb-16">
       <h2 class="sr-only">{t('NewestWork-1')}</h2>
       <div style="background-color: black;" class="aspect-video flex justify-center mx-4 rounded-lg">
-        <video class="w-full h-full" width="720" height="540" autoplay loop muted playsinline poster="https://bucket-wei.webdong.dev/hero-blur.webp">
-          <source src="https://bucket-wei.webdong.dev/hero.webm" type="video/webm" />
-          <source src="https://bucket-wei.webdong.dev/hero.mp4" type="video/mp4" />
+        <video class="w-full h-full" width="720" height="540" autoplay loop muted playsinline poster={resolveAsset(heroVideo.poster)}>
+          {heroVideo.sources.map((source: { src: string; type: string }) => (
+            <source src={resolveAsset(source.src)} type={source.type} />
+          ))}
         </video>
       </div>
     </section>

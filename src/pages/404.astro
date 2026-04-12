@@ -1,7 +1,8 @@
 ---
 import Base from '@/layouts/Base.astro';
 
-import { useTranslations, languages, type LanguageKey } from '@/i18n/i18n.ts';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { useTranslations, languages, defaultLocale, type LanguageKey } from '@/i18n/i18n.ts';
 
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
@@ -16,6 +17,6 @@ export function getStaticPaths() {
   <main class="text-center min-h-screen flex items-center justify-center flex-col">
     <h1 class="text-8xl font-black">404</h1>
     <p class="text-lg mb-8">{t('404-1')}</p>
-    <a class="underline" href="/">{t('404-2')}</a>
+    <a class="underline" href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/')}>{t('404-2')}</a>
   </main>
 </Base>

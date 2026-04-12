@@ -6,6 +6,7 @@ import { languages, prefixDefaultLocale, defaultLocale } from './src/i18n/i18n.t
 
 // https://astro.build/config
 export default defineConfig({
+  ...(process.env.BASE_URL ? { base: process.env.BASE_URL } : {}),
   prefetch: {
     prefetchAll: true,
   },

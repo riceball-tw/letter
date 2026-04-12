@@ -1,11 +1,15 @@
 ---
 import { SEO } from 'astro-seo';
 import '@/styles/global.css';
+import { getEntry } from 'astro:content';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import { regionTags, useTranslations, type LanguageKey, languageTags, defaultLocale, prefixDefaultLocale } from '@/i18n/i18n.ts';
-import { favicons, globalOgImage, website } from '@/utility/config.ts';
+import { resolveAsset } from '@/utils/paths.ts';
 import { ClientRouter } from "astro:transitions";
+
+const config = await getEntry('config', 'site');
+const { favicons, globalOgImage, website } = config!.data;
 
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
@@ -44,13 +48,15 @@ const customTransition = {
 };
 
 function getPathnameWithoutLocale(pathname: string) {
-  return pathname.replace(`/${Astro.currentLocale}`, '').replace(/\/?$/, '/');
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const pathWithoutBase = base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+  return pathWithoutBase.replace(`/${Astro.currentLocale}`, '').replace(/\/?$/, '/');
 }
 ---
 
 <!DOCTYPE html>
 <html style={
-  `--globalHighlightTextureImage: url(${website.globalHighlightTextureImage})`
+  `--globalHighlightTextureImage: url(${resolveAsset(website.globalHighlightTextureImage)})`
 } class="font-sans-serif text-primary-900 selection:bg-accent/40 selection:text-black" lang={languageTags[currentLocale]} translate="no">
   <head>
     <SEO
@@ -78,12 +84,13 @@ function getPathnameWithoutLocale(pathname: string) {
     }}
     extend={{
       link: [
-        { rel: 'manifest', href: '/manifest.webmanifest' },
+        { rel: 'manifest', href: resolveAsset('/manifest.webmanifest') },
           // Default Language Alternates
           {
             rel: "alternate",
             hreflang: "x-default",
             href: new URL(
+              import.meta.env.BASE_URL +
               defaultLocale + 
             getPathnameWithoutLocale(Astro.url.pathname) ,
               Astro.site
@@ -98,7 +105,9 @@ function getPathnameWithoutLocale(pathname: string) {
             return ({
             rel: "alternate",
             hreflang: tag,
-            href: new URL(regionMap[tag] + getPathnameWithoutLocale(Astro.url.pathname),
+            href: new URL(
+              import.meta.env.BASE_URL +
+              regionMap[tag] + getPathnameWithoutLocale(Astro.url.pathname),
               Astro.site
             ).toString()
           })}),
@@ -107,9 +116,11 @@ function getPathnameWithoutLocale(pathname: string) {
           ...Object.keys(languageTags).map(tag => ({
             rel: "alternate",
             hreflang: tag,
-            href: new URL(prefixDefaultLocale 
+            href: new URL(
+              import.meta.env.BASE_URL +
+              (prefixDefaultLocale 
                 ? tag + getPathnameWithoutLocale(Astro.url.pathname) 
-                : Astro.url.pathname,
+                : Astro.url.pathname),
               Astro.site
             ).toString()
           })),
@@ -127,16 +138,16 @@ function getPathnameWithoutLocale(pathname: string) {
       ],
     }}
   />
-    <link rel="apple-touch-icon" sizes="180x180" href={favicons['apple-touch-icon']}/>
-    <link rel="icon" type="image/png" sizes="32x32" href={favicons['32']} />
-    <link rel="icon" type="image/png" sizes="16x16" href={favicons['16']} />
+    <link rel="apple-touch-icon" sizes="180x180" href={resolveAsset(favicons['apple-touch-icon'])}/>
+    <link rel="icon" type="image/png" sizes="32x32" href={resolveAsset(favicons['32'])} />
+    <link rel="icon" type="image/png" sizes="16x16" href={resolveAsset(favicons['16'])} />
     <ClientRouter fallback="swap" />
   </head>
   <body
     class="bg-fixed print:bg-none"
     style={`
     background-color: #f5f5f5;
-    background-image: url('${website.globalBackgroundTextureImage}')
+    background-image: url('${resolveAsset(website.globalBackgroundTextureImage)}')
     `}
   >
     <Navbar />
