@@ -2,6 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import Banner from '@/components/Banner.astro';
 import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { resolveAsset } from '@/utils/paths.ts';
 import { defaultLocale } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getEntry } from 'astro:content';
@@ -40,9 +41,9 @@ export function getStaticPaths() {
     <section class="mb-16">
       <h2 class="sr-only">{t('NewestWork-1')}</h2>
       <div style="background-color: black;" class="aspect-video flex justify-center mx-4 rounded-lg">
-        <video class="w-full h-full" width="720" height="540" autoplay loop muted playsinline poster={heroVideo.poster}>
+        <video class="w-full h-full" width="720" height="540" autoplay loop muted playsinline poster={resolveAsset(heroVideo.poster)}>
           {heroVideo.sources.map((source: { src: string; type: string }) => (
-            <source src={source.src} type={source.type} />
+            <source src={resolveAsset(source.src)} type={source.type} />
           ))}
         </video>
       </div>
