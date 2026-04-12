@@ -6,7 +6,7 @@ favicons:
   android-chrome-512: /assets/global/favicon/android-chrome-512x512.png
   apple-touch-icon: /assets/global/favicon/apple-touch-icon.png
 globalOgImage:
-  url: https://bucket-wei.webdong.dev/global/og-image.jpg
+  url: /assets/global/og.jpg
   height: 630
   width: 1200
   type: image/jpeg
