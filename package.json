@@ -12,6 +12,9 @@
     "prettier": "prettier src/**/*.{js,astro}",
     "lint": "eslint src/**/*.{js,astro}"
   },
+  "overrides": {
+    "vite": "^7"
+  },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
     "@tailwindcss/vite": "^4.0.14",
@@ -42,6 +45,7 @@
     "prettier-plugin-astro": "^0.10.0",
     "qrcode": "^1.5.4",
     "typescript": "^5.5.4",
+    "vite": "^8.0.8",
     "vitest": "^2.0.5",
     "wrangler": "^4.13.0"
   },
