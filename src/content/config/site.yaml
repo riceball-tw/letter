@@ -1,10 +1,10 @@
 favicons:
-  "16": https://bucket-wei.webdong.dev/favicon/favicon-16x16.png
-  "32": https://bucket-wei.webdong.dev/favicon/favicon-32x32.png
-  "512": https://bucket-wei.webdong.dev/favicon/favicon-512x512.png
-  android-chrome-192: https://bucket-wei.webdong.dev/favicon/android-chrome-192x192.png
-  android-chrome-512: https://bucket-wei.webdong.dev/favicon/android-chrome-512x512.png
-  apple-touch-icon: https://bucket-wei.webdong.dev/favicon/apple-touch-icon.png
+  "16": /assets/global/favicon/favicon-16x16.png
+  "32": /assets/global/favicon/favicon-32x32.png
+  "512": /assets/global/favicon/favicon-512x512.png
+  android-chrome-192: /assets/global/favicon/android-chrome-192x192.png
+  android-chrome-512: /assets/global/favicon/android-chrome-512x512.png
+  apple-touch-icon: /assets/global/favicon/apple-touch-icon.png
 globalOgImage:
   url: https://bucket-wei.webdong.dev/global/og-image.jpg
   height: 630
