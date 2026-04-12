@@ -14,7 +14,7 @@
 
 ![Letter Theme Preview](./public/assets/global/preview.jpg)
 
-Start your online [resume](https://riceball-tw.github.io/letter/en/resume/) or [projects](https://riceball-tw.github.io/letter/en/work/) or even [FAQ](https://riceball-tw.github.io/letter/en/faq/) through fully typed markdown and settings.
+Start your online [resume](https://riceball-tw.github.io/letter/en/resume/) or [projects](https://riceball-tw.github.io/letter/en/work/) or even [FAQ](https://riceball-tw.github.io/letter/en/faq/) through fully typed markdown and settings. Check out the [Demo](https://riceball-tw.github.io/letter/en/), hosted on GitHub Pages.
   
 ## Key Features
 
@@ -44,10 +44,10 @@ pnpm run dev
 
 You might want to replace the demo content from these places:
 
-- `/public`: Stores all the assets used in the site (logo.svg, favicon...)
-- `/src/content`: Stores all the data like site config, projects, resume and faq content (Replace with your own content!)
-- `/src/styles/global.css`: Tailwind CSS and CSS variables configs to customize the colors of the theme. (Tweak in your own style!)
-- `/src/i18n`: Translation used in astro template
+- `/public`: Assets used in the site (logo.svg, favicon...)
+- `/src/content`: Site config, projects, resume and faq content (Replace with your own content!)
+- `/src/styles/global.css`: CSS configs. (Tweak in your own style!)
+- `/src/i18n`: Translation used in astro templates
 - `/.github/workflows/deploy-pipeline.yml`: GitHub CI/CD pipeline (You should setup env below)
   - `LHCI_GITHUB_APP_TOKEN`, `LHCI_TOKEN`: For lighthouse and GitHub integration
   - `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`: For Cloudflare Wrangler CD Pipeline.
