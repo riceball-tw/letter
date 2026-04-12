@@ -13,27 +13,27 @@ globalOgImage:
 website:
   name: Letter
   username: Joe
-  email: bottle200918@gmail.com
-  emojiStatus: 🍙
-  globalBackgroundTextureImage: https://bucket-wei.webdong.dev/global/natural-paper.webp
-  globalHighlightTextureImage: https://bucket-wei.webdong.dev/global/highlight-texture.webp
+  email: example@example.com
+  emojiStatus: ✉️
+  globalBackgroundTextureImage: /assets/global/nature-paper.webp
+  globalHighlightTextureImage: /assets/global/highlight-texture.webp
   socials:
     - name: Blog
-      url: https://www.webdong.dev/
+      url: https://example.com/
     - name: GitHub
-      url: https://github.com/riceball-tw
+      url: https://example.com/
     - name: Threads
-      url: https://www.threads.net/@webdong.dev
+      url: https://example.com/
     - name: Behance
-      url: https://www.behance.net/riceballwei
+      url: https://example.com/
     - name: CakeResume
-      url: https://www.cakeresume.com/me/Riceball-wei
+      url: https://example.com/
 heroVideo:
-  poster: https://bucket-wei.webdong.dev/hero-blur.webp
+  poster: /assets/global/hero.webp
   sources:
-    - src: https://bucket-wei.webdong.dev/hero.webm
+    - src: /assets/global/hero.webm
       type: video/webm
-    - src: https://bucket-wei.webdong.dev/hero.mp4
+    - src: /assets/global/hero.mp4
       type: video/mp4
 techGroups:
   - id: "Work-TechGroup-all"
