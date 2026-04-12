@@ -90,7 +90,7 @@ export const collections = {
     }),
   }),
   resume: defineCollection({
-    loader: glob({ pattern: '**/[^_]*.json', base: './src/content/resume' }),
+    loader: glob({ pattern: '**/[^_]*.{json,yaml,yml}', base: './src/content/resume' }),
     schema: z.object({
       personalInfo: z.object({
         name: z.string(),

@@ -1,0 +1,124 @@
+---
+personalInfo:
+  name: 王小明
+  role: 网页开发
+  description: 我经营<a href="#" class="underline text-primary-900">网页技术部落格累计共上百篇文章</a>并透过<a
+    href="#" class="underline text-primary-900">技术自媒体</a>发掘各式有趣的网页相关议题，例如：<span class="text-primary-900">设计、UI、UX、网页开发与测试……</span>
+    等领域都有涉略。
+  socialLinks:
+  - name: GitHub
+    icon: simple-icons:github
+    url: https://github.com/
+  - name: Email
+    icon: simple-icons:gmail
+    url: mailto:test@example.com
+  - name: LinkedIn
+    icon: simple-icons:linkedin
+    url: https://www.linkedin.com/
+  - name: Behance
+    icon: simple-icons:behance
+    url: https://www.behance.net/
+  - name: Threads
+    icon: simple-icons:threads
+    url: https://www.threads.com/
+workExperience:
+- title: 网页前端工程师
+  company:
+    name: 不存在的股份有限公司
+    link: https://example.com/
+  time: 2025/07 ~ 至今．在职
+  achievements:
+  - 独立负责核心业务前端架构设计与开发，维持系统高可用性与扩展性
+  - 优化前端效能与首屏载入速度，将 Core Web Vitals 指标提升至优秀等级
+  - 导入自动化测试流程与 CI/CD 管道，显著减少手动测试成本与回归错误
+  - 参与技术选型与专案重构，解决旧有技术债并提升团队开发效率
+  - 与后端、产品经理及设计师协作，定义技术规范与 API 介面标准
+  - 撰写详细的技术文档与知识库，推动团队内部技术交流与经验传承
+  techs:
+  - Go Gin
+  - MongoDB
+  - Redis
+  - TypeScript
+  - Vite Vue3
+  - TanStack Query
+  - Pinia
+  - Tailwind
+  - Shadcn Vue
+  - Vitest
+  - Vue Test Utils
+- title: 前端工程师
+  company:
+    name: 不存在的股份有限公司
+    link: https://example.com/
+  time: 2023/10 ~ 2024/10．1 年
+  achievements:
+  - 优化专案架构，提升代码复用率与维护效率
+  - 导入现代化前端框架，提升系统效能与安全性
+  - 建立标准化元件库，加速产品开发周期
+  - 设计并实作 CI/CD 流程，实现自动化测试与部署
+  - 撰写自动化测试脚本，确保核心功能之稳定性
+  - 参与资安漏洞检测与修复建议
+  techs:
+  - Nx Monorepo
+  - TypeScript
+  - Nuxt 3
+  - Pinia
+  - Tailwind
+  - Shadcn Vue
+  - Cypress
+  - Cucumber
+  - Vitest
+  - Git Flow
+  - GitHub Actions
+- title: 前端助教
+  company:
+    name: 不存在的股份有限公司
+    link: https://example.com/
+  time: 2022/07 ~ 2023/07．1 年
+  achievements:
+  - 协助指导学员解决前端开发相关技术难题
+  - 参与撰写网页开发课程教材与实作范例
+  - 撰写技术部落格文章，分享开发经验与知识
+  techs:
+  - React
+  - Vue
+  - jQuery
+  - Bootstrap
+  - Sass
+- title: 网页设计开发自由工作者
+  company:
+    name: 不存在的股份有限公司
+    link: https://example.com/
+  time: 2020/03 ~ 2020/05．3 个月
+  achievements:
+  - 负责多个品牌活动网页之视觉设计与前端实作
+  techs:
+  - Sass
+  - Bootstrap
+achievements:
+- title: 某年度技术征文比赛 - 入选
+  subtitle: 撰写系列技术文章分享开发实务心得
+  url: https://example.com/
+education:
+- title: 某国立大学．资讯设计系学士毕业
+  time: 2019/09 ~ 2023/06
+  description: 于在校期间积极参与产学合作专案，并负责多项专案之网页设计与前端开发工作。
+skills:
+- developments:
+  - UI：Figma、Illustrator、Photoshop
+  - 切版：BEM CSS、Sass、Bootstrap 5、Tailwind、Shadcn
+  - 前端：Nuxt 3（Vue）、Next 15（React）、Astro、jQuery
+  - 状态管理：Pinia、Zustand
+  - 后端：Express、Go Gin、MongoDB、Cloudflare Workers
+  - 程式品质：ESLint、Prettier 与 TypeScript
+  - 程式测试：Vitest、Vue Test Utils、Playwright、Cypress
+  - 代码管理：Git、GitLab、GitHub、Git Flow、GitHub Flow
+  - DevOps：GitHub Actions、Docker
+links:
+- mySite:
+  - title: 线上履历：
+    link: https://example.com/resume
+  - title: 线上作品集：
+    link: https://example.com/portfolio
+  - title: 技术部落格：
+    link: https://example.com/blog
