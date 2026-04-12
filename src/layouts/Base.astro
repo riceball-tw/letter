@@ -68,7 +68,7 @@ function getPathnameWithoutLocale(pathname: string) {
       basic: {
         title: `${globalTitle}`,
         type: 'website',
-        image: `${globalOgImage.url}`,
+        image: `${resolveAsset(globalOgImage.url)}`,
       },
       image: {
         type: `${globalOgImage.type}`,
@@ -80,7 +80,7 @@ function getPathnameWithoutLocale(pathname: string) {
     twitter={{
       title: `${globalTitle}`,
       description: `${globalDescription}`,
-      image: `${globalOgImage.url}`,
+      image: `${resolveAsset(globalOgImage.url)}`,
       imageAlt: `${globalOgImageAlt}`,
     }}
     extend={{
