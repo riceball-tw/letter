@@ -97,3 +97,4 @@ export function changeLanguage(
   const cleanedPath = removeLanguagePrefix(path, languagePrefixes);
   return constructNewPath(targetLocale, cleanedPath, isDefaultLocalePrefixed);
 }
+

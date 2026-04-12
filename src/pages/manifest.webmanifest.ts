@@ -1,15 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getEntry } from 'astro:content';
+import { resolveAsset } from '@/utils/paths.ts';
 
 // https://web.dev/articles/add-manifest
 // eslint-disable-next-line import/prefer-default-export
 export const GET: APIRoute = async () => {
   const config = await getEntry('config', 'site');
   const { favicons } = config!.data;
-  const resolveAsset = (path: string) => {
-    if (path.startsWith('http')) return path;
-    return `${import.meta.env.BASE_URL}/${path}`.replace(/\/+/g, '/');
-  };
 
   return new Response(
     JSON.stringify({

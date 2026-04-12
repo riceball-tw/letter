@@ -5,6 +5,7 @@ import Banner from '@/components/Banner.astro';
 import { Icon } from 'astro-icon/components';
 
 import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { resolveAsset } from '@/utils/paths.ts';
 import type { AllowedTechs } from '@/content.config'
 
 const currentLocale = Astro.currentLocale as LanguageKey;
@@ -211,10 +212,10 @@ document.addEventListener("astro:page-load", pageLoadEvent => {
                             loop
                             muted
                             playsinline
-                            poster={project.data?.thumbnail?.src || ''}
+                            poster={resolveAsset(project.data?.thumbnail?.src || '')}
                           >
                             {project.data.video.map((source) => (
-                              <source src={source.src} type={source.type} />
+                              <source src={resolveAsset(source.src)} type={source.type} />
                             ))}
                           </video>
                         );
@@ -225,7 +226,7 @@ document.addEventListener("astro:page-load", pageLoadEvent => {
                             class="w-full rounded-lg z-(--z-index-work-thumbnail) relative"
                             width="720"
                             height="540"
-                            src={project.data.thumbnail.src}
+                            src={resolveAsset(project.data.thumbnail.src)}
                             alt={project.data.thumbnail.alt}
                           />
                         );
@@ -274,7 +275,7 @@ document.addEventListener("astro:page-load", pageLoadEvent => {
                                 class="object-contain"
                                 width="20"
                                 height="20"
-                                src={`${import.meta.env.BASE_URL}/assets/global/github.svg`.replace(/\/+/, '/')}
+                                src={resolveAsset('/assets/global/github.svg')}
                                 alt="GitHub Logo"
                               />
                               {t('Work-5')}
@@ -287,7 +288,7 @@ document.addEventListener("astro:page-load", pageLoadEvent => {
                               <img
                                 width="20"
                                 height="20"
-                                src={`${import.meta.env.BASE_URL}/assets/global/open-new.svg`.replace(/\/+/, '/')}
+                                src={resolveAsset('/assets/global/open-new.svg')}
                                 alt={t('Work-6')}
                               />
                               {t('Work-7')}
