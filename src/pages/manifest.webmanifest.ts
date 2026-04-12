@@ -6,23 +6,27 @@ import { getEntry } from 'astro:content';
 export const GET: APIRoute = async () => {
   const config = await getEntry('config', 'site');
   const { favicons } = config!.data;
+  const resolveAsset = (path: string) => {
+    if (path.startsWith('http')) return path;
+    return `${import.meta.env.BASE_URL}/${path}`.replace(/\/+/g, '/');
+  };
 
   return new Response(
     JSON.stringify({
       name: "Wei's Website",
       icons: [
         {
-          src: favicons['android-chrome-192'],
+          src: resolveAsset(favicons['android-chrome-192']),
           type: 'image/png',
           sizes: '192x192',
         },
         {
-          src: favicons['android-chrome-512'],
+          src: resolveAsset(favicons['android-chrome-512']),
           type: 'image/png',
           sizes: '512x512',
         },
         {
-          src: favicons['512'],
+          src: resolveAsset(favicons['512']),
           type: 'image/png',
           sizes: '512x512',
           purpose: 'maskable',

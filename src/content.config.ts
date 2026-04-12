@@ -151,7 +151,14 @@ export const collections = {
     loader: glob({ pattern: '**/[^_]*.{yaml,yml}', base: './src/content/config' }),
     schema: z
       .object({
-        favicons: z.record(z.string(), z.string()),
+        favicons: z.object({
+          "16": z.string(),
+          "32": z.string(),
+          "512": z.string(),
+          "android-chrome-192": z.string(),
+          "android-chrome-512": z.string(),
+          "apple-touch-icon": z.string(),
+        }),
         globalOgImage: z.object({
           url: z.string(),
           height: z.number(),
