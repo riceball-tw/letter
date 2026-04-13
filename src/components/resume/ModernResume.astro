@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import { useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { sanitizeHtml } from '@/utils/sanitize.ts';
 // Only use qrcode in dev env
 // eslint-disable-next-line import/no-extraneous-dependencies
 import QRCode from 'qrcode'
@@ -60,7 +61,7 @@ function renderAchievements(list: Achievement): string {
    
            <!-- Quote -->
             <div class="md:col-start-2 md:col-span-3 relative">
-              <blockquote class="text-primary-500 quote font-serif" set:html={resume.personalInfo.description}>
+              <blockquote class="text-primary-500 quote font-serif" set:html={sanitizeHtml(resume.personalInfo.description)}>
              </blockquote>
            </div>
          </div>
@@ -89,7 +90,7 @@ function renderAchievements(list: Achievement): string {
                            </li>
                          </ul>
                        </div>
-                       <ul class="list-disc list-inside font-serif" set:html={renderAchievements(experience.achievements)}>
+                       <ul class="list-disc list-inside font-serif" set:html={sanitizeHtml(renderAchievements(experience.achievements))}>
                        </ul>
                      </div>
                      <ul class="flex flex-wrap gap-2 text-xs">
@@ -139,7 +140,7 @@ function renderAchievements(list: Achievement): string {
                  <div class="md:col-start-2 md:col-span-3 ">
                    <h3 class="font-medium category-item-title">{education.title}</h3>
                    <time class="font-mono work-tag text-primary-600">{education.time}</time>
-                   <p class="font-serif" set:html={education.description}></p>
+                   <p class="font-serif" set:html={sanitizeHtml(education.description)}></p>
                  </div>
                ))
            }

@@ -6,6 +6,7 @@ import { resolveAsset } from '@/utils/paths.ts';
 import { defaultLocale } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getEntry } from 'astro:content';
+import { sanitizeHtml } from '@/utils/sanitize.ts';
 
 const config = await getEntry('config', 'site');
 const { heroVideo, website: { username, socials } } = config!.data;
@@ -27,14 +28,14 @@ export function getStaticPaths() {
         {t('Hero-Greeting', {
           name: username
         })}<br/>
-        <Fragment set:html={t('Hero-Intro', {
+        <Fragment set:html={sanitizeHtml(t('Hero-Intro', {
           appsLink: `<a class="highlight" href="${getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/work')}">${t('Hero-Apps')}</a>`
-        })} />
+        }))} />
         
-        <Fragment set:html={t('Hero-CTA', {
+        <Fragment set:html={sanitizeHtml(t('Hero-CTA', {
           articlesLink: `<a class="highlight" href="${blogUrl}">${t('Hero-BlogLink')}</a>`,
           resumeLink: `<a class="highlight" href="${getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/resume')}">${t('Hero-Resume')}</a>`
-        })} />
+        }))} />
       </h1>
     </Banner>
 

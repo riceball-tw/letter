@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import { useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { sanitizeHtml } from '@/utils/sanitize.ts';
 
 interface Props {
   resume: CollectionEntry<'resume'>['data'];
@@ -51,7 +52,7 @@ function renderAchievements(list: Achievement): string {
       <!-- Summary / Quote -->
       {resume.personalInfo.description && (
         <section class="mb-5 font-serif text-xs">
-          <div set:html={resume.personalInfo.description}></div>
+          <div set:html={sanitizeHtml(resume.personalInfo.description)}></div>
         </section>
       )}
 
@@ -71,7 +72,7 @@ function renderAchievements(list: Achievement): string {
                 </div>
                 <span class="text-xs text-gray-600 font-medium whitespace-nowrap mt-0.5 sm:mt-0">{experience.time}</span>
               </div>
-              <ul class="font-serif list-disc list-outside ml-5 text-xs space-y-1 text-gray-800" set:html={renderAchievements(experience.achievements)}>
+              <ul class="font-serif list-disc list-outside ml-5 text-xs space-y-1 text-gray-800" set:html={sanitizeHtml(renderAchievements(experience.achievements))}>
               </ul>
               {experience.techs && experience.techs.length > 0 && (
                 <div class="text-xs text-gray-600 mt-1.5">
@@ -93,7 +94,7 @@ function renderAchievements(list: Achievement): string {
                 <h3 class="text-sm font-bold text-gray-900">{education.title}</h3>
                 <span class="text-xs text-gray-600 font-medium whitespace-nowrap">{education.time}</span>
               </div>
-              <div class="font-serif text-xs text-gray-800" set:html={education.description}></div>
+              <div class="font-serif text-xs text-gray-800" set:html={sanitizeHtml(education.description)}></div>
             </div>
           ))}
         </div>
