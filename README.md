@@ -42,17 +42,16 @@ pnpm run dev
 
 ## Customization
 
-You might want to replace the demo content from these places:
-
-- `astro.config.mjs`: Astro config (IMPORTANT: Set site url property with your own domain)
-- `/public`: Assets used in the site (logo.svg, favicon...)
-- `/src/content`: Site config, projects, resume and faq content (Replace with your own content!)
-- `/src/styles/global.css`: CSS configs. (Tweak in your own style!)
-- `/src/i18n`: Translation used in astro templates
-- `/.github/workflows/deploy-pipeline.yml`: GitHub CI/CD pipeline (You should setup env below)
-  - `LHCI_GITHUB_APP_TOKEN`, `LHCI_TOKEN`: For lighthouse and GitHub integration
-  - `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`: For Cloudflare Wrangler CD Pipeline.
-  - `BASE_URL`: Prefix for every link and assets in website (Useful for GitHub Pages deployment that has no custom domain)
+1. `astro.config.mjs`: Astro configs
+    - `site`: Your final, deployed URL
+2. `/public`: Assets used in the site (logo.svg, favicon...)
+3. `/src/content`: Site config, projects, resume and faq content
+4. `/src/styles/global.css`: Styles
+5. `/src/i18n`: Translation used in astro templates
+6. `/.github/workflows/deploy-pipeline.yml`: GitHub CI/CD pipeline (You should setup env below)
+    - `LHCI_GITHUB_APP_TOKEN`, `LHCI_TOKEN`: For lighthouse and GitHub integration
+    - `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`: For Cloudflare Wrangler CD Pipeline.
+    - `BASE_URL`: Prefix for every link and assets in website (Useful for GitHub Pages deployment that has no custom domain)
 
 ### Build
 
