@@ -45,23 +45,86 @@ function isActiveNavItem(navItem: string) {
   </a>
 
   <div class="flex gap-2 items-center">
-    <ul class="flex gap-2">
+    <ul class="relative flex gap-2" data-nav-container>
+      <div
+        id="nav-indicator"
+        class="nav-indicator absolute left-0 top-0 z-0 rounded-full bg-primary-900 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] opacity-0 pointer-events-none"
+        transition:persist
+      ></div>
       {
-        links.map(({ url, name, isHiddenOnMobile }) => (
-          <li class={isHiddenOnMobile ? 'hidden md:inline-block' : ''}>
-            <a
-              class={`md:px-8 px-4 py-4 rounded-full transition-colors whitespace-nowrap ${
-                isActiveNavItem(url) ? 'bg-primary-900 text-primary-50' : 'hover:bg-primary-100'
-              }`}
-              href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, url)}
-            >
-              {name}
-            </a>
-          </li>
-        ))
+        links.map(({ url, name, isHiddenOnMobile }) => {
+          const active = isActiveNavItem(url);
+          return (
+            <li class={isHiddenOnMobile ? 'hidden md:inline-block' : ''}>
+              <a
+                data-nav-link
+                aria-selected={active ? 'true' : 'false'}
+                class={`md:px-8 px-4 py-4 rounded-full transition-colors whitespace-nowrap relative z-10 block ${
+                  active ? 'text-primary-50' : 'text-primary-900 hover:bg-primary-100'
+                }`}
+                href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, url)}
+              >
+                {name}
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
     <LanguagePicker/>
   </div>
 </nav>
+
+<script is:inline>
+  (function () {
+    function init() {
+      const container = document.querySelector('[data-nav-container]');
+      if (!container) return;
+
+      const indicator = container.querySelector('#nav-indicator');
+      const activeLink = container.querySelector('[data-nav-link][aria-selected="true"]');
+
+      function updateIndicator(el) {
+        if (!indicator || !el) return;
+        indicator.style.width = `${el.offsetWidth}px`;
+        indicator.style.height = `${el.offsetHeight}px`;
+        indicator.style.transform = `translate(${el.offsetLeft}px, ${el.offsetTop}px)`;
+        indicator.style.opacity = '1';
+      }
+
+      if (activeLink) {
+        if (!window.__navInitialized) {
+          // First load of the site: snap to position
+          indicator.style.transition = 'none';
+          updateIndicator(activeLink);
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (indicator) indicator.style.transition = '';
+            });
+          });
+          window.__navInitialized = true;
+        } else {
+          // Subsequent loads (persisted): slide from old position
+          updateIndicator(activeLink);
+        }
+      }
+
+      window.addEventListener('resize', () => {
+        const currentActive = container.querySelector('[data-nav-link][aria-selected="true"]');
+        if (currentActive) updateIndicator(currentActive);
+      });
+    }
+
+    if (!window.__navListenerAdded) {
+      window.__navListenerAdded = true;
+      document.addEventListener('astro:page-load', init);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
 
