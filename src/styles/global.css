@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @config "../../tailwind.config.ts";
+@plugin "@tailwindcss/typography";
 @theme inline {
   --text-xs--line-height: calc(1 / 0.75);
   --text-sm--line-height: calc(1.25 / 0.875);
