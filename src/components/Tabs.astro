@@ -8,6 +8,7 @@ interface TabItem {
 interface Props {
   tabs: TabItem[];
   defaultTabId: string;
+  tabKey?: string;
   rootClass?: string;
   hiddenPanelClasses?: string[];
   style?: string;
@@ -16,6 +17,7 @@ interface Props {
 const {
   tabs,
   defaultTabId,
+  tabKey = 'default',
   rootClass = '',
   hiddenPanelClasses = ['hidden'],
   style,
@@ -28,6 +30,7 @@ const inactiveButtonClasses = ['text-primary-600'];
   class={rootClass}
   style={style}
   data-tab-toggle
+  data-tab-key={tabKey}
   data-hidden-panel-classes={hiddenPanelClasses.join(' ')}
 >
   <div class="flex gap-2 rounded-full bg-primary-100 bg-opacity-90 p-1 shadow-sm backdrop-blur-md">
@@ -62,21 +65,32 @@ const inactiveButtonClasses = ['text-primary-600'];
       const activeClasses = ['bg-white', 'shadow-sm', 'text-primary-900'];
       const inactiveClasses = ['text-primary-600'];
       const hiddenPanelClasses = root.dataset.hiddenPanelClasses?.split(' ').filter(Boolean) || ['hidden'];
+      const storageKey = `active-tab-${root.dataset.tabKey}`;
+
+      function applyTab(selectedId) {
+        root.querySelectorAll('button').forEach((btn) => {
+          const isActive = btn.dataset.tabId === selectedId;
+          
+          activeClasses.forEach(c => btn.classList.toggle(c, isActive));
+          inactiveClasses.forEach(c => btn.classList.toggle(c, !isActive));
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+          const panel = document.getElementById(btn.dataset.panelId);
+          if (panel) hiddenPanelClasses.forEach(c => panel.classList.toggle(c, !isActive));
+        });
+        localStorage.setItem(storageKey, selectedId);
+      }
+
+      // Restore from localStorage
+      const savedTabId = localStorage.getItem(storageKey);
+      const defaultTabId = root.querySelector('[data-tab-id]')?.dataset.tabId;
+      if (savedTabId && [...root.querySelectorAll('button')].some(b => b.dataset.tabId === savedTabId)) {
+        applyTab(savedTabId);
+      }
 
       root.querySelectorAll('button').forEach((button) => {
         button.addEventListener('click', () => {
-          const selectedId = button.dataset.tabId;
-          
-          root.querySelectorAll('button').forEach((btn) => {
-            const isActive = btn.dataset.tabId === selectedId;
-            
-            activeClasses.forEach(c => btn.classList.toggle(c, isActive));
-            inactiveClasses.forEach(c => btn.classList.toggle(c, !isActive));
-            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-
-            const panel = document.getElementById(btn.dataset.panelId);
-            if (panel) hiddenPanelClasses.forEach(c => panel.classList.toggle(c, !isActive));
-          });
+          applyTab(button.dataset.tabId);
         });
       });
     });
