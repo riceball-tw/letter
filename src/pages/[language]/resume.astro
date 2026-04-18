@@ -52,6 +52,23 @@ export function getStaticPaths() {
 </div>
 </Base>
 
+<style>
+  .resume-content {
+    animation: contentFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes contentFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(0.5rem) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+</style>
+
 <style is:inline>
   body {
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/print-color-adjust */
