@@ -1,5 +1,65 @@
 ---
-title: 关于我
+title: 关于 Letter 主题
 ---
 
-关于我
+![Letter Theme Preview](./public/assets/global/preview.jpg)
+
+通过结构完善的 Markdown 和配置文件，你可以轻松搭建自己的在线[简历](https://riceball-tw.github.io/letter/zh-cn/resume/)、[作品集](https://riceball-tw.github.io/letter/zh-cn/work/)，甚至是[个人问答](https://riceball-tw.github.io/letter/zh-cn/faq/)。本网站基于 [Letter Portfolio](https://github.com/riceball-tw/letter) 主题构建，并部署在 GitHub Pages 上。
+
+## 特性
+
+* Astro v6 + Tailwind v4
+* 极快（Lighthouse 评分 100%）
+* 响应式设计，SEO 友好
+* 内置多语言支持
+* CI 流程（ESLint + Prettier + TypeScript 类型检查 + Lighthouse）
+* CD 流程（Cloudflare Pages 或 GitHub Pages）
+
+## 如何开始
+
+### 开发
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/riceball-tw/letter.git .
+
+# 2. 安装依赖
+pnpm install
+
+# 3. 启动开发服务器
+pnpm run dev
+```
+
+## 自定义
+
+1. `astro.config.mjs`：Astro 相关配置
+   * `site`：最终部署的 URL
+2. `/src/content`：全站配置、作品集、简历与问答内容
+3. `/src/i18n`：用于 Astro 模板中的多语言翻译
+4. `/public`：网站资源（logo.svg、favicon 等）
+5. `/src/styles/global.css`：全局样式
+6. `/.github/workflows/deploy-pipeline.yml`：GitHub CI/CD 流程（可配置以下环境变量）
+   * `LHCI_GITHUB_APP_TOKEN`、`LHCI_TOKEN`：用于 Lighthouse 检测
+   * `CLOUDFLARE_ACCOUNT_ID`、`CLOUDFLARE_API_TOKEN`：用于 Cloudflare Wrangler 部署
+   * `BASE_URL`：为网站中的所有链接和资源添加前缀（通常用于在没有自定义域名的 GitHub Pages 部署场景）
+
+### 构建
+
+```bash
+# 1. 部署 ./dist 目录中的静态网页
+pnpm install
+pnpm build
+pnpm preview
+
+# 2. 使用 Docker 部署
+docker build -t <your-astro-image-name> .
+docker run -p <local-port>:<container-port> <your-astro-image-name>
+```
+
+## 参与开发
+
+如果你有任何问题或需要帮助，欢迎在 [GitHub Issue](https://github.com/riceball-tw/letter/issues) 发起讨论。
+
+## 授权
+
+MIT

@@ -1,5 +1,66 @@
 ---
-title: About Me
+title: About the Letter Theme
 ---
 
-About Me
+![Letter Theme Preview](./public/assets/global/preview.jpg)
+
+Easily build your own online [Resume](https://riceball-tw.github.io/letter/en/resume/), [Portfolio](https://riceball-tw.github.io/letter/en/work/), or even a [FAQ page](https://riceball-tw.github.io/letter/en/faq/) through fully typed markdown and settings. This website is built using the [Letter Portfolio](https://github.com/riceball-tw/letter) theme and deployed on GitHub Pages.
+
+## Features
+
+- Astro v6 + Tailwind v4
+- Optimize for speed (100% lighthouse score)
+- Responsive & SEO-friendly
+- Built-in i18n
+- CI pipeline (ESLint + Prettier + TS Typecheck + Lighthouse)
+- CD pipeline ([Cloudflare Pages](https://pages.cloudflare.com/) or [GitHub Pages](https://pages.github.com/))
+
+
+## Getting Started
+
+### Development
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/riceball-tw/letter.git .
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Run development server
+pnpm run dev
+```
+
+## Customization
+
+1. `astro.config.mjs`: Astro configs
+    - `site`: Your final, deployed URL
+2. `/public`: Assets used in the site (logo.svg, favicon...)
+3. `/src/content`: Site config, projects, resume and faq content
+4. `/src/styles/global.css`: Styles
+5. `/src/i18n`: Translation used in astro templates
+6. `/.github/workflows/deploy-pipeline.yml`: GitHub CI/CD pipeline (You should setup env below)
+    - `LHCI_GITHUB_APP_TOKEN`, `LHCI_TOKEN`: For lighthouse and GitHub integration
+    - `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`: For Cloudflare Wrangler CD Pipeline.
+    - `BASE_URL`: Prefix for every link and assets in website (Useful for GitHub Pages deployment that has no custom domain)
+
+### Build
+
+```bash
+# 1. Deploy the contents of the `./dist` folder wherever you like.
+pnpm install
+pnpm build
+pnpm preview
+
+# 2. Deploy docker container wherever you like.
+docker build -t <your-astro-image-name> .
+docker run -p <local-port>:<container-port> <your-astro-image-name>
+```
+
+## Helping out
+
+For questions or support, please open an [issue on GitHub](https://github.com/riceball-tw/letter/issues).
+
+## License
+
+MIT
