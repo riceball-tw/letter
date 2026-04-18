@@ -58,7 +58,7 @@ function isActiveNavItem(navItem: string) {
             <li class={isHiddenOnMobile ? 'hidden md:inline-block' : ''}>
               <a
                 data-nav-link
-                aria-selected={active ? 'true' : 'false'}
+                data-active={active ? 'true' : 'false'}
                 class={`md:px-8 px-4 py-4 rounded-full transition-colors whitespace-nowrap relative z-10 block ${
                   active ? 'text-primary-50' : 'text-primary-900 hover:bg-primary-100'
                 }`}
@@ -76,13 +76,13 @@ function isActiveNavItem(navItem: string) {
 </nav>
 
 <script is:inline>
-  (function () {
+  (function initNavbar() {
     function init() {
       const container = document.querySelector('[data-nav-container]');
       if (!container) return;
 
       const indicator = container.querySelector('#nav-indicator');
-      const activeLink = container.querySelector('[data-nav-link][aria-selected="true"]');
+      const activeLink = container.querySelector('[data-nav-link][data-active="true"]');
 
       function updateIndicator(el) {
         if (!indicator || !el) return;
@@ -93,7 +93,7 @@ function isActiveNavItem(navItem: string) {
       }
 
       if (activeLink) {
-        if (!window.__navInitialized) {
+        if (!window.navInitialized) {
           // First load of the site: snap to position
           indicator.style.transition = 'none';
           updateIndicator(activeLink);
@@ -102,7 +102,7 @@ function isActiveNavItem(navItem: string) {
               if (indicator) indicator.style.transition = '';
             });
           });
-          window.__navInitialized = true;
+          window.navInitialized = true;
         } else {
           // Subsequent loads (persisted): slide from old position
           updateIndicator(activeLink);
@@ -110,13 +110,13 @@ function isActiveNavItem(navItem: string) {
       }
 
       window.addEventListener('resize', () => {
-        const currentActive = container.querySelector('[data-nav-link][aria-selected="true"]');
+        const currentActive = container.querySelector('[data-nav-link][data-active="true"]');
         if (currentActive) updateIndicator(currentActive);
       });
     }
 
-    if (!window.__navListenerAdded) {
-      window.__navListenerAdded = true;
+    if (!window.navListenerAdded) {
+      window.navListenerAdded = true;
       document.addEventListener('astro:page-load', init);
     }
 
