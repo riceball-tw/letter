@@ -30,6 +30,7 @@
     "@iconify-json/material-symbols": "^1.2.8",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.1.113",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/qrcode": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^5.59.8",
