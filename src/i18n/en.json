@@ -8,10 +8,10 @@
   "Head-4": "Open Graph Image",
 
   "Hero-Greeting": "Hi, I'm {name}.",
-  "Hero-Intro": "A web developer from Taiwan passionate about building {appsLink}!",
+  "Hero-Intro": "A web developer from Taiwan, passionate about building {appsLink}!",
   "Hero-Apps": "engaging web apps",
   "Hero-BlogLink": "200+ blog articles",
-  "Hero-CTA": "Feel free to explore my work, {articlesLink}, or check out my {resumeLink}.",
+  "Hero-CTA": "Feel free to browse my work, {articlesLink}, or check out {resumeLink}.",
   "Hero-Resume": "Resume",
 
   "NewestWork-1": "Newest Work",
