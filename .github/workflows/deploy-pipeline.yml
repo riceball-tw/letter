@@ -103,44 +103,19 @@ jobs:
           PUBLIC_LHCI_BASE_URL: ${{ vars.PUBLIC_LHCI_BASE_URL }}
         run: pnpm dlx @lhci/cli@0.14.x autorun
 
-  # deploy:
-  #   needs: [build]
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #     deployments: write
-
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Environment Setup
-  #       uses: ./.github/actions/setup
-
-  #     - name: Download build artifacts
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: dist
-  #         path: dist
-
-  #     - name: Publish
-  #       uses: cloudflare/wrangler-action@v3.14.1
-  #       with:
-  #         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-  #         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-  #         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-  #         command: pages deploy --branch=${{ github.ref_name }}
-
-  deploy-github-pages:
+  deploy:
     needs: [build]
     runs-on: ubuntu-latest
     permissions:
-      pages: write
-      id-token: write
+      contents: read
+      deployments: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Environment Setup
+        uses: ./.github/actions/setup
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -148,11 +123,10 @@ jobs:
           name: dist
           path: dist
 
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Publish
+        uses: cloudflare/wrangler-action@v3.14.1
         with:
-          path: dist
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy --branch=${{ github.ref_name }}
