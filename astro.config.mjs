@@ -30,7 +30,7 @@ export default defineConfig({
     prefetchAll: true,
   },
   // !IMPORTANT: Set site url property with your own domain
-  site: 'https://weweweb.pages.dev',
+  site: 'https://riceball-tw.github.io',
   build: {
     inlineStylesheets: 'always',
   },
