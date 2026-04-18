@@ -44,14 +44,13 @@ jobs:
         uses: actions/checkout@v4
 
       # !To seperate code & content, you can overwrite content from below
-      # - name: Checkout external content
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: joe-doe/repo
-      #     ref: main
-      #     path: src/content/
-      #     token: ${{ secrets.CHECKOUT_GITHUB_CONTENT_PAT }}
-      #     lfs: true
+      - name: Checkout external content
+        uses: actions/checkout@v4
+        with:
+          repository: riceball-tw/weweweb
+          ref: main
+          path: src/content/
+          token: ${{ secrets.CHECKOUT_GITHUB_CONTENT_PAT }}
 
       - name: Environment Setup
         uses: ./.github/actions/setup
