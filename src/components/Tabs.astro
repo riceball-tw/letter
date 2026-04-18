@@ -30,6 +30,7 @@ const {
   data-tab-toggle
   data-tab-key={tabKey}
   data-hidden-panel-classes={hiddenPanelClasses.join(' ')}
+  role="tablist"
 >
   <div class="relative flex gap-2 rounded-full bg-primary-100 bg-opacity-90 p-1 shadow-sm backdrop-blur-md">
     <div
@@ -42,6 +43,7 @@ const {
         <button
           type="button"
           id={`tab-${tab.id}`}
+          role="tab"
           class:list={[
             'resume-tab-btn relative z-10 cursor-pointer rounded-full px-6 py-2 text-sm font-medium transition-colors hover:text-primary-900',
             isActive ? 'text-primary-900' : 'text-primary-600',
@@ -58,13 +60,13 @@ const {
 </div>
 
 <script is:inline>
-  (function () {
+  (function initTabs() {
     function init() {
       document.querySelectorAll('[data-tab-toggle]').forEach((root) => {
         if (root.dataset.initialized === 'true') return;
 
-        const hiddenPanelClasses = root.dataset.hiddenPanelClasses?.split(' ').filter(Boolean) || ['hidden'];
-        const tabKey = root.dataset.tabKey;
+        const { tabKey, hiddenPanelClasses: hiddenClassesStr } = root.dataset;
+        const hiddenPanelClasses = hiddenClassesStr?.split(' ').filter(Boolean) || ['hidden'];
         const storageKey = `active-tab-${tabKey}`;
         const indicator = root.querySelector('.tab-indicator');
 
@@ -140,12 +142,12 @@ const {
           if (activeBtn) updateIndicator(activeBtn);
         });
 
-        root.dataset.initialized = 'true';
+        root.setAttribute('data-initialized', 'true');
       });
     }
 
-    if (!window.__tabsListenerAdded) {
-      window.__tabsListenerAdded = true;
+    if (!window.tabsListenerAdded) {
+      window.tabsListenerAdded = true;
       document.addEventListener('astro:page-load', init);
     }
 
