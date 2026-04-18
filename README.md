@@ -44,10 +44,10 @@ pnpm run dev
 
 1. `astro.config.mjs`: Astro configs
     - `site`: Your final, deployed URL
-2. `/public`: Assets used in the site (logo.svg, favicon...)
-3. `/src/content`: Site config, projects, resume and faq content
-4. `/src/styles/global.css`: Styles
-5. `/src/i18n`: Translation used in astro templates
+2. `/src/content`: Site config, projects, resume and faq content
+3. `/src/i18n`: Translation used in astro templates
+4. `/public`: Assets used in the site (logo.svg, favicon...)
+5. `/src/styles/global.css`: Styles
 6. `/.github/workflows/deploy-pipeline.yml`: GitHub CI/CD pipeline (You should setup env below)
     - `LHCI_GITHUB_APP_TOKEN`, `LHCI_TOKEN`: For lighthouse and GitHub integration
     - `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`: For Cloudflare Wrangler CD Pipeline.
