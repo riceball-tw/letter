@@ -3,6 +3,7 @@ import Base from '@/layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
 import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
 import { getEntry } from 'astro:content';
+import Tabs from '@/components/Tabs.astro';
 import ModernResume from '@/components/resume/ModernResume.astro';
 import TraditionalResume from '@/components/resume/TraditionalResume.astro';
 
@@ -19,29 +20,20 @@ export function getStaticPaths() {
 ---
 <Base title={t('Resume-1')}>
 <div style="padding-top: var(--navbar-height)" class='pb-16 flex flex-col gap-8 md:gap-12'>
-  
-  <!-- Tab Toggle UI -->
-  <div class="sticky z-10 container mx-auto flex justify-center px-4 md:px-0 print:hidden" style="top: 1rem">
-    <div class="flex gap-2 p-1 bg-primary-100 rounded-full shadow-sm backdrop-blur-md bg-opacity-90">
-      <button 
-        id="tab-modern" 
-        class="resume-tab-btn cursor-pointer px-6 py-2 rounded-full text-sm font-medium transition-all hover:text-primary-900 bg-white shadow-sm text-primary-900"
-        onclick="switchResumeTab('modern')"
-      >
-        {t('Modern')}
-      </button>
-      <button 
-        id="tab-traditional" 
-        class="resume-tab-btn cursor-pointer px-6 py-2 rounded-full text-sm font-medium transition-all text-primary-600 hover:text-primary-900"
-        onclick="switchResumeTab('traditional')"
-      >
-        {t('Traditional')}
-      </button>
-    </div>
-  </div>
+
+  <Tabs
+    defaultTabId="modern"
+    rootClass="sticky z-10 container mx-auto flex justify-center px-4 md:px-0 print:hidden"
+    style="top: 1rem"
+    hiddenPanelClasses={['hidden', 'print:hidden']}
+    tabs={[
+      { id: 'modern', label: t('Modern'), panelId: 'resume-modern' },
+      { id: 'traditional', label: t('Traditional'), panelId: 'resume-traditional' },
+    ]}
+  />
 
   <!-- Resume Containers -->
-  <div id="resume-wrapper">
+  <div>
     <div id="resume-modern" class="resume-content">
       <ModernResume {resume} />
     </div>
@@ -58,40 +50,6 @@ export function getStaticPaths() {
 
 </div>
 </Base>
-
-<script is:inline>
-  /* eslint-disable no-unused-vars */
-  function switchResumeTab(tab) {
-    const btnModern = document.getElementById('tab-modern');
-    const btnTrad = document.getElementById('tab-traditional');
-    const contentModern = document.getElementById('resume-modern');
-    const contentTrad = document.getElementById('resume-traditional');
-    
-    // For primary Tailwind colors used in base site
-    const activeClasses = ['bg-white', 'shadow-sm', 'text-primary-900'];
-    const inactiveTextClass = 'text-primary-600';
-    
-    if (tab === 'modern') {
-      btnModern.classList.add(...activeClasses);
-      btnModern.classList.remove(inactiveTextClass);
-      
-      btnTrad.classList.remove(...activeClasses);
-      btnTrad.classList.add(inactiveTextClass);
-      
-      contentModern.classList.remove('hidden', 'print:hidden');
-      contentTrad.classList.add('hidden', 'print:hidden');
-    } else {
-      btnTrad.classList.add(...activeClasses);
-      btnTrad.classList.remove(inactiveTextClass);
-      
-      btnModern.classList.remove(...activeClasses);
-      btnModern.classList.add(inactiveTextClass);
-      
-      contentTrad.classList.remove('hidden', 'print:hidden');
-      contentModern.classList.add('hidden', 'print:hidden');
-    }
-  }
-</script>
 
 <style is:inline>
   body {
