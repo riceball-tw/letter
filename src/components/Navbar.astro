@@ -45,32 +45,34 @@ function isActiveNavItem(navItem: string) {
   </a>
 
   <div class="flex gap-2 items-center">
-    <ul class="relative flex gap-2" data-nav-container>
+    <div class="relative" data-nav-container>
       <div
         id="nav-indicator"
         class="nav-indicator absolute left-0 top-0 z-0 rounded-full bg-primary-900 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] opacity-0 pointer-events-none"
         transition:persist
       ></div>
-      {
-        links.map(({ url, name, isHiddenOnMobile }) => {
-          const active = isActiveNavItem(url);
-          return (
-            <li class={isHiddenOnMobile ? 'hidden md:inline-block' : ''}>
-              <a
-                data-nav-link
-                data-active={active ? 'true' : 'false'}
-                class={`md:px-8 px-4 py-4 rounded-full transition-colors whitespace-nowrap relative z-10 block ${
-                  active ? 'text-primary-50' : 'text-primary-900 hover:bg-primary-100'
-                }`}
-                href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, url)}
-              >
-                {name}
-              </a>
-            </li>
-          );
-        })
-      }
-    </ul>
+      <ul class="flex gap-2">
+        {
+          links.map(({ url, name, isHiddenOnMobile }) => {
+            const active = isActiveNavItem(url);
+            return (
+              <li class={isHiddenOnMobile ? 'hidden md:inline-block' : ''}>
+                <a
+                  data-nav-link
+                  data-active={active ? 'true' : 'false'}
+                  class={`md:px-8 px-4 py-4 rounded-full transition-colors whitespace-nowrap relative z-10 block ${
+                    active ? 'text-primary-50' : 'text-primary-900 hover:bg-primary-100'
+                  }`}
+                  href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, url)}
+                >
+                  {name}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
     <LanguagePicker/>
   </div>
 </nav>
