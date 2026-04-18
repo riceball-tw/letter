@@ -22,8 +22,6 @@ const {
   hiddenPanelClasses = ['hidden'],
   style,
 } = Astro.props as Props;
-const activeButtonClasses = ['bg-white', 'shadow-sm', 'text-primary-900'];
-const inactiveButtonClasses = ['text-primary-600'];
 ---
 
 <div
@@ -33,7 +31,10 @@ const inactiveButtonClasses = ['text-primary-600'];
   data-tab-key={tabKey}
   data-hidden-panel-classes={hiddenPanelClasses.join(' ')}
 >
-  <div class="flex gap-2 rounded-full bg-primary-100 bg-opacity-90 p-1 shadow-sm backdrop-blur-md">
+  <div class="relative flex gap-2 rounded-full bg-primary-100 bg-opacity-90 p-1 shadow-sm backdrop-blur-md">
+    <div
+      class="tab-indicator absolute left-0 top-0 z-0 rounded-full bg-white shadow-sm transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+    ></div>
     {tabs.map((tab) => {
       const isActive = tab.id === defaultTabId;
 
@@ -42,8 +43,8 @@ const inactiveButtonClasses = ['text-primary-600'];
           type="button"
           id={`tab-${tab.id}`}
           class:list={[
-            'resume-tab-btn cursor-pointer rounded-full px-6 py-2 text-sm font-medium transition-all hover:text-primary-900',
-            isActive ? activeButtonClasses : inactiveButtonClasses,
+            'resume-tab-btn relative z-10 cursor-pointer rounded-full px-6 py-2 text-sm font-medium transition-colors hover:text-primary-900',
+            isActive ? 'text-primary-900' : 'text-primary-600',
           ]}
           data-tab-id={tab.id}
           data-panel-id={tab.panelId}
@@ -62,23 +63,50 @@ const inactiveButtonClasses = ['text-primary-600'];
       if (root.dataset.initialized) return;
       root.dataset.initialized = 'true';
 
-      const activeClasses = ['bg-white', 'shadow-sm', 'text-primary-900'];
-      const inactiveClasses = ['text-primary-600'];
       const hiddenPanelClasses = root.dataset.hiddenPanelClasses?.split(' ').filter(Boolean) || ['hidden'];
-      const storageKey = `active-tab-${root.dataset.tabKey}`;
+      const tabKey = root.dataset.tabKey;
+      const storageKey = `active-tab-${tabKey}`;
+      const indicator = root.querySelector('.tab-indicator');
+
+      function updateIndicator(btn) {
+        if (!indicator || !btn) return;
+        indicator.style.width = `${btn.offsetWidth}px`;
+        indicator.style.height = `${btn.offsetHeight}px`;
+        indicator.style.transform = `translate(${btn.offsetLeft}px, ${btn.offsetTop}px)`;
+      }
 
       function applyTab(selectedId) {
+        let activeBtn = null;
+
         root.querySelectorAll('button').forEach((btn) => {
           const isActive = btn.dataset.tabId === selectedId;
           
-          activeClasses.forEach(c => btn.classList.toggle(c, isActive));
-          inactiveClasses.forEach(c => btn.classList.toggle(c, !isActive));
+          btn.classList.toggle('text-primary-900', isActive);
+          btn.classList.toggle('text-primary-600', !isActive);
           btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+          if (isActive) {
+            activeBtn = btn;
+          }
 
           const panel = document.getElementById(btn.dataset.panelId);
           if (panel) hiddenPanelClasses.forEach(c => panel.classList.toggle(c, !isActive));
         });
+
+        if (activeBtn) {
+          updateIndicator(activeBtn);
+        }
         localStorage.setItem(storageKey, selectedId);
+      }
+
+      // Initialize indicator position without animation initially
+      if (indicator) {
+        indicator.style.transition = 'none';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            indicator.style.transition = '';
+          });
+        });
       }
 
       // Restore from localStorage
