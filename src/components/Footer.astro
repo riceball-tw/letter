@@ -15,7 +15,7 @@ const t = useTranslations(Astro.currentLocale as LanguageKey);
       <span class="font-bold">{t('Footer-1')}</span>
       <span class="text-primary-700">
         <br />
-        {t('Footer-2')} <button class="cursor-pointer highlight" data-mail-btn={website.email}>Email</button> {t('Footer-3')} <a class="highlight" href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/resume')}>{t('Footer-4')}</a> {t('Footer-5')}
+        <span set:html={DOMPurify.sanitize(t('Footer-Contact', { emailBtn: '<button class="cursor-pointer highlight" data-mail-btn="' + website.email + '">Email</button>', resumeLink: '<a class="highlight" href="' + getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/resume') + '">' + t('Footer-Resume') + '</a>' }))} />
       </span>
     </h2>
 
