@@ -7,7 +7,7 @@ import { resolveAsset } from '@/utils/paths.ts';
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
 const links = [
-  { url: '/', name: t('Navbar-1'), isHiddenOnMobile: true },
+  // { url: '/', name: t('Navbar-1'), isHiddenOnMobile: true },
   { url: '/resume', name: t('Navbar-2') },
   { url: '/work', name: t('Navbar-3') },
   { url: '/faq', name: t('Navbar-4') },
@@ -32,7 +32,7 @@ function isActiveNavItem(navItem: string) {
 }
 ---
 
-<nav style="height: var(--navbar-height)" class="px-4 flex flex-col md:flex-row flex-wrap justify-center z-50 relative md:justify-between items-center container mx-auto print:hidden">
+<nav style="min-height: var(--navbar-height)" class="px-4 py-2 flex gap-2 flex-col md:flex-row  justify-center z-50 relative md:justify-between items-center container mx-auto print:hidden">
   <a
     class="hover:bg-primary-100 p-4 -m-4 rounded-full aspect-square flex justify-center items-center transition-colors"
     href={getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/')}
@@ -45,14 +45,14 @@ function isActiveNavItem(navItem: string) {
     />
   </a>
 
-  <div class="flex gap-2 items-center">
+  <div class="flex flex-wrap gap-2 items-center justify-center">
     <div class="relative" data-nav-container>
       <div
         id="nav-indicator"
         class="nav-indicator absolute left-0 top-0 z-0 rounded-full bg-primary-900 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] opacity-0 pointer-events-none"
         transition:persist
       ></div>
-      <ul class="flex gap-2">
+      <ul class="flex flex-wrap gap-2 items-center">
         {
           links.map(({ url, name, isHiddenOnMobile }) => {
             const active = isActiveNavItem(url);
@@ -72,9 +72,11 @@ function isActiveNavItem(navItem: string) {
             );
           })
         }
+        <li>
+          <LanguagePicker/>
+        </li>
       </ul>
     </div>
-    <LanguagePicker/>
   </div>
 </nav>
 
