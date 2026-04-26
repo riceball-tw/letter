@@ -56,6 +56,7 @@
   "ThoughtCategory-seedling": "Seedling",
   "ThoughtCategory-budding": "Budding",
   "ThoughtCategory-evergreen": "Evergreen",
+  "ThoughtCategory-empty": "No thoughts in this category yet.",
   "Modern": "Modern",
   "Traditional": "Traditional"
 }
