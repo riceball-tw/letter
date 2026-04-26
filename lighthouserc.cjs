@@ -10,6 +10,7 @@ module.exports = {
         `http://localhost:4321${base}/en/resume/`,
         `http://localhost:4321${base}/en/work/`,
         `http://localhost:4321${base}/en/faq/`,
+        `http://localhost:4321${base}/en/thought/`,
       ].map((url) => url.replace(/([^:])\/\//g, '$1/')),
     },
     upload: {
