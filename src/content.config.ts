@@ -89,6 +89,14 @@ export const collections = {
       title: z.string(),
     }),
   }),
+  thought: defineCollection({
+    loader: glob({ pattern: '**/[^_]*.mdx', base: './src/content/thought' }),
+    schema: z.object({
+      title: z.string(),
+      category: z.enum(['seedling', 'budding', 'evergreen']),
+      publishDate: z.date(),
+    }),
+  }),
   resume: defineCollection({
     loader: glob({ pattern: '**/[^_]*.{json,yaml,yml}', base: './src/content/resume' }),
     schema: z.object({
