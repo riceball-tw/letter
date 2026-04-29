@@ -45,19 +45,19 @@ const t = useTranslations(Astro.currentLocale as LanguageKey);
 </footer>
 
 <script is:inline>
-  document.addEventListener("astro:page-load", () => {
-    document.querySelector('[data-mail-btn]').addEventListener('click', (e) => {
-      navigator.clipboard.writeText(e.target.dataset.mailBtn);
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-mail-btn]');
+    if (!btn) return;
+    navigator.clipboard.writeText(btn.dataset.mailBtn);
 
-      const popover = e.target.querySelector('[data-mail-popover]');
-      /* eslint-disable no-param-reassign */
-      e.target.disabled = true;
-      popover.classList.remove('hidden');
-      setTimeout(() => {
-        popover.classList.add('hidden');
-        e.target.disabled = false;
-      }, 1000);
-      /* eslint-enable no-param-reassign */
-    });
+    const popover = btn.querySelector('[data-mail-popover]');
+    /* eslint-disable no-param-reassign */
+    btn.disabled = true;
+    popover.classList.remove('hidden');
+    setTimeout(() => {
+      popover.classList.add('hidden');
+      btn.disabled = false;
+    }, 1000);
+    /* eslint-enable no-param-reassign */
   });
 </script>
