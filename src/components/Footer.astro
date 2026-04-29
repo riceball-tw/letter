@@ -15,7 +15,7 @@ const t = useTranslations(Astro.currentLocale as LanguageKey);
       <span class="font-bold">{t('Footer-1')}</span>
       <span class="text-primary-700">
         <br />
-        <span set:html={DOMPurify.sanitize(t('Footer-Contact', { emailBtn: '<button class="cursor-pointer highlight relative" data-mail-btn="' + website.email + '">Email<span data-mail-popover class="absolute left-1/2 -translate-x-1/2 top-full mt-1 text-base tracking-wide whitespace-nowrap hidden bg-primary-100 text-primary-800 px-2 py-1 rounded">' + t('Footer-7') + '</span></button>', resumeLink: '<a class="highlight" href="' + getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/resume') + '">' + t('Footer-Resume') + '</a>' }))} />
+        <span set:html={DOMPurify.sanitize(t('Footer-Contact', { emailBtn: `<button class="cursor-pointer highlight relative" data-mail-btn="${  website.email  }">Email<span data-mail-popover class="absolute left-1/2 -translate-x-1/2 top-full mt-1 text-base tracking-wide whitespace-nowrap hidden bg-primary-100 text-primary-800 px-2 py-1 rounded">${  t('Footer-7')  }</span></button>`, resumeLink: `<a class="highlight" href="${  getRelativeLocaleUrl(Astro.currentLocale || defaultLocale, '/resume')  }">${  t('Footer-Resume')  }</a>` }))} />
       </span>
     </h2>
 
