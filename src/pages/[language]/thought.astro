@@ -72,8 +72,6 @@ const tabs = [
               publishDate={data.publishDate}
               currentLocale={currentLocale}
               index={index}
-              categoryIcon={categoryIcons[data.category as keyof typeof categoryIcons]}
-              categoryLabel={t(`ThoughtCategory-${data.category}` as keyof typeof enTranslation)}
             >
               <Content />
             </StickyNote>
@@ -93,8 +91,6 @@ const tabs = [
                   publishDate={data.publishDate}
                   currentLocale={currentLocale}
                   index={index}
-                  categoryIcon={categoryIcons[data.category as keyof typeof categoryIcons]}
-                  categoryLabel={t(`ThoughtCategory-${data.category}` as keyof typeof enTranslation)}
                 >
                   <Content />
                 </StickyNote>

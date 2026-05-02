@@ -7,11 +7,9 @@ interface Props {
   publishDate: Date;
   currentLocale: LanguageKey;
   index: number;
-  categoryLabel: string;
-  categoryIcon: string;
 }
 
-const { title, category, publishDate, currentLocale, index, categoryLabel, categoryIcon } = Astro.props;
+const { title, category, publishDate, currentLocale, index } = Astro.props;
 
 const stickyColors = {
   seedling: 'bg-yellow-100/70 border-yellow-200/50',

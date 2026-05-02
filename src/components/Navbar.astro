@@ -6,7 +6,13 @@ import { resolveAsset } from '@/utils/paths.ts';
 
 const t = useTranslations(Astro.currentLocale as LanguageKey);
 
-const links = [
+interface NavLink {
+  url: string;
+  name: string;
+  isHiddenOnMobile?: boolean;
+}
+
+const links: NavLink[] = [
   // { url: '/', name: t('Navbar-1'), isHiddenOnMobile: true },
   { url: '/resume', name: t('Navbar-2') },
   { url: '/work', name: t('Navbar-3') },
@@ -54,7 +60,7 @@ function isActiveNavItem(navItem: string) {
       ></div>
       <ul class="flex flex-wrap gap-2 items-center">
         {
-          links.map(({ url, name, isHiddenOnMobile }) => {
+          links.map(({ url, name, isHiddenOnMobile = false }) => {
             const active = isActiveNavItem(url);
             return (
               <li class={isHiddenOnMobile ? 'hidden md:inline-block' : ''}>
