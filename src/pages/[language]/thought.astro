@@ -83,7 +83,7 @@ const tabs = [
         <div id={`panel-${category}`} class="tab-panel">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {thoughtsWithContent
-              .filter(t => t.data.category === category)
+              .filter(thought => thought.data.category === category)
               .map(({ data, Content }, index) => (
                 <StickyNote 
                   title={data.title}
@@ -96,7 +96,7 @@ const tabs = [
                 </StickyNote>
               ))}
           </div>
-          {thoughtsWithContent.filter(t => t.data.category === category).length === 0 && (
+          {thoughtsWithContent.filter(thought => thought.data.category === category).length === 0 && (
             <p class="text-center text-gray-500 py-12">{t('ThoughtCategory-empty')}</p>
           )}
         </div>
