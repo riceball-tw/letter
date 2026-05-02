@@ -63,28 +63,14 @@ const tabs = [
         />
       </div>
 
-      <div id="panel-all" class="tab-panel">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {thoughtsWithContent.map(({ data, Content }, index) => (
-            <StickyNote 
-              title={data.title}
-              category={data.category}
-              publishDate={data.publishDate}
-              currentLocale={currentLocale}
-              index={index}
-            >
-              <Content />
-            </StickyNote>
-          ))}
-        </div>
-      </div>
-
-      {categories.map(category => (
-        <div id={`panel-${category}`} class="tab-panel">
+      {tabs.map((tab) => (
+        <div id={tab.panelId} class="tab-panel">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {thoughtsWithContent
-              .filter(thought => thought.data.category === category)
-              .map(({ data, Content }, index) => (
+            {thoughtsWithContent.map(({ data, Content }, index) => {
+              const isVisible = tab.id === 'all' || data.category === tab.id;
+              if (!isVisible) return null;
+
+              return (
                 <StickyNote 
                   title={data.title}
                   category={data.category}
@@ -94,9 +80,11 @@ const tabs = [
                 >
                   <Content />
                 </StickyNote>
-              ))}
+              );
+            })}
           </div>
-          {thoughtsWithContent.filter(thought => thought.data.category === category).length === 0 && (
+          {tab.id !== 'all' && 
+            thoughtsWithContent.filter(t => t.data.category === tab.id).length === 0 && (
             <p class="text-center text-gray-500 py-12">{t('ThoughtCategory-empty')}</p>
           )}
         </div>
