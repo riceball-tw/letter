@@ -9,8 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
-    "prettier": "prettier src/**/*.{js,astro}",
-    "lint": "eslint src/**/*.{js,astro}"
+    "prettier": "prettier src",
+    "lint": "eslint src"
   },
   "overrides": {
     "vite": "^7"
