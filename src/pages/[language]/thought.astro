@@ -64,7 +64,7 @@ const tabs = [
       </div>
 
       {tabs.map((tab) => (
-        <div id={tab.panelId} class="tab-panel">
+        <div id={tab.panelId} class:list={['tab-panel', { hidden: tab.id !== 'all' }]}>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {thoughtsWithContent.map(({ data, Content }, index) => {
               const isVisible = tab.id === 'all' || data.category === tab.id;
