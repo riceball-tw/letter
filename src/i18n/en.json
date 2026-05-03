@@ -42,6 +42,7 @@
   "Navbar-2": "Resume",
   "Navbar-3": "Work",
   "Navbar-4": "FAQ",
+  "Navbar-5": "Thought",
   "Footer-1": "Interested?",
   "Footer-Contact": "Feel free to check out {emailBtn} or {resumeLink} for more information.",
   "Footer-Resume": "resume",
@@ -50,6 +51,10 @@
   "LanguagePicker-1": "Select preferred language",
   "404-1": "Page not found",
   "404-2": "Go Home",
+  "ThoughtCategory-seedling": "Seedling",
+  "ThoughtCategory-budding": "Budding",
+  "ThoughtCategory-evergreen": "Evergreen",
+  "ThoughtCategory-empty": "No thoughts in this category yet.",
   "Modern": "Modern",
   "Traditional": "Traditional"
 }

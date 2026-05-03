@@ -1,0 +1,94 @@
+---
+import Base from '@/layouts/Base.astro';
+import Banner from '@/components/Banner.astro';
+import Tabs from '@/components/Tabs.astro';
+import StickyNote from '@/components/StickyNote.astro';
+import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { getCollection, render } from 'astro:content';
+import enTranslation from '@/i18n/en.json';
+
+const currentLocale = Astro.currentLocale as LanguageKey;
+const t = useTranslations(currentLocale as LanguageKey);
+
+const thoughts = await getCollection('thought');
+const localeRelatedThoughts = thoughts
+  .filter(thought => thought.id.startsWith(currentLocale))
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const categories = ['seedling', 'budding', 'evergreen'] as const;
+
+const thoughtsWithContent = await Promise.all(
+  localeRelatedThoughts.map(async (thought) => {
+    const { Content } = await render(thought);
+    return { ...thought, Content };
+  })
+);
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((language) => ({
+    params: { language },
+  }));
+}
+
+const categoryIcons = {
+  seedling: '🌱',
+  budding: '🌿',
+  evergreen: '🌳',
+};
+
+const tabs = [
+  { id: 'all', label: t('Work-TechGroup-all'), panelId: 'panel-all' },
+  ...categories.map((cat) => ({
+    id: cat,
+    label: `${categoryIcons[cat]} ${t(`ThoughtCategory-${cat}` as keyof typeof enTranslation)}`,
+    panelId: `panel-${cat}`,
+  })),
+];
+---
+
+<Base title={t('Navbar-5')}>
+  <main class="md:min-h-screen min-h-auto">
+    <Banner>
+      <h1 class="text-3xl md:text-6xl font-semibold px-4">
+        { t('Navbar-5') }
+      </h1>
+    </Banner>
+
+    <section class="mb-16 container mx-auto px-4">
+      <div class="flex justify-center mb-12">
+        <Tabs 
+          tabs={tabs} 
+          defaultTabId="all" 
+          tabKey="thought-categories"
+        />
+      </div>
+
+      {tabs.map((tab) => (
+        <div id={tab.panelId} class:list={['tab-panel', { hidden: tab.id !== 'all' }]}>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {thoughtsWithContent.map(({ data, Content }, index) => {
+              const isVisible = tab.id === 'all' || data.category === tab.id;
+              if (!isVisible) return null;
+
+              return (
+                <StickyNote 
+                  title={data.title}
+                  category={data.category}
+                  publishDate={data.publishDate}
+                  currentLocale={currentLocale}
+                  index={index}
+                >
+                  <Content />
+                </StickyNote>
+              );
+            })}
+          </div>
+          {tab.id !== 'all' && 
+            thoughtsWithContent.filter(thought => thought.data.category === tab.id).length === 0 && (
+            <p class="text-center text-gray-500 py-12">{t('ThoughtCategory-empty')}</p>
+          )}
+        </div>
+      ))}
+    </section>
+  </main>
+</Base>

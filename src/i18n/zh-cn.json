@@ -42,6 +42,7 @@
   "Navbar-2": "履历",
   "Navbar-3": "作品",
   "Navbar-4": "问答",
+  "Navbar-5": "随想",
   "Footer-1": "想要了解更多？",
   "Footer-Contact": "欢迎透过 {emailBtn} 或 {resumeLink} 了解更多。",
   "Footer-Resume": "履历",
@@ -50,6 +51,10 @@
   "LanguagePicker-1": "选择偏好语言",
   "404-1": "找不到此页面",
   "404-2": "回首页",
+  "ThoughtCategory-seedling": "种子",
+  "ThoughtCategory-budding": "萌芽",
+  "ThoughtCategory-evergreen": "常青",
+  "ThoughtCategory-empty": "此分类暂无想法。",
   "Modern": "现代",
   "Traditional": "传统"
 }

@@ -32,7 +32,7 @@ const {
   data-hidden-panel-classes={hiddenPanelClasses.join(' ')}
   role="tablist"
 >
-  <div class="relative flex gap-2 rounded-full bg-primary-100 bg-opacity-90 p-1 shadow-sm backdrop-blur-md">
+  <div class="relative flex flex-wrap gap-2 rounded-full bg-primary-100 bg-opacity-90 p-1">
     <div
       class="tab-indicator absolute left-0 top-0 z-0 rounded-full bg-white shadow-sm transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
     ></div>
@@ -45,7 +45,7 @@ const {
           id={`tab-${tab.id}`}
           role="tab"
           class:list={[
-            'resume-tab-btn relative z-10 cursor-pointer rounded-full px-6 py-2 text-sm font-medium transition-colors hover:text-primary-900',
+            'resume-tab-btn relative z-10 cursor-pointer rounded-full px-6 py-2 text-sm font-medium transition-colors hover:text-primary-900 whitespace-nowrap',
             isActive ? 'text-primary-900' : 'text-primary-600',
           ]}
           data-tab-id={tab.id}

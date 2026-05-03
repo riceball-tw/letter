@@ -1,0 +1,41 @@
+---
+import { type LanguageKey } from '@/i18n/i18n.ts';
+
+interface Props {
+  title: string;
+  category: string;
+  publishDate: Date;
+  currentLocale: LanguageKey;
+  index: number;
+}
+
+const { title, category, publishDate, currentLocale, index } = Astro.props;
+
+const stickyColors = {
+  seedling: 'bg-yellow-50/70 border-yellow-200/50',
+  budding: 'bg-emerald-50/70 border-emerald-200/50',
+  evergreen: 'bg-sky-50/70 border-sky-200/50',
+};
+
+const rotations = ['rotate-1', '-rotate-1', 'rotate-2', '-rotate-2'];
+---
+
+<div class={`relative group p-8 ${stickyColors[category as keyof typeof stickyColors] || 'bg-white'} ${rotations[index % rotations.length]} shadow-md hover:shadow-xl transition-all hover:rotate-0 hover:scale-[1.02] h-fit border`}>
+  {/* Tape Effect */}
+  <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/40 backdrop-blur-sm -rotate-2 border-x border-white/20 z-10 shadow-sm" />
+  
+  <div class="flex justify-between items-start mb-6">
+    <time class="text-xs font-mono text-gray-400">
+      {publishDate.toLocaleDateString(currentLocale)}
+    </time>
+  </div>
+  
+  <h2 class="text-xl font-bold mb-4 text-gray-800 leading-tight">
+    {title}
+  </h2>
+  
+  <div class="font-serif prose prose-sm prose-gray max-w-none">
+    <slot />
+  </div>
+  
+</div>

@@ -42,6 +42,7 @@
   "Navbar-2": "履歷",
   "Navbar-3": "作品",
   "Navbar-4": "問答",
+  "Navbar-5": "想法",
   "Footer-1": "想要了解更多？",
   "Footer-Contact": "歡迎透過 {emailBtn} 或 {resumeLink} 了解更多。",
   "Footer-Resume": "履歷",
@@ -50,6 +51,10 @@
   "LanguagePicker-1": "選擇偏好語言",
   "404-1": "找不到此頁面",
   "404-2": "回首頁",
+  "ThoughtCategory-seedling": "種子",
+  "ThoughtCategory-budding": "萌芽",
+  "ThoughtCategory-evergreen": "常青",
+  "ThoughtCategory-empty": "此分類暫無想法。",
   "Modern": "現代",
   "Traditional": "傳統"
 }
