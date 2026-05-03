@@ -10,10 +10,11 @@ interface NavLink {
   url: string;
   name: string;
   isHiddenOnMobile?: boolean;
+  isHidden?: boolean; // Hide nav item through CSS to avoid js active item not found
 }
 
 const links: NavLink[] = [
-  // { url: '/', name: t('Navbar-1'), isHiddenOnMobile: true },
+  { url: '/', name: t('Navbar-1'), isHidden: true },
   { url: '/resume', name: t('Navbar-2') },
   { url: '/work', name: t('Navbar-3') },
   { url: '/faq', name: t('Navbar-4') },
@@ -60,10 +61,18 @@ function isActiveNavItem(navItem: string) {
       ></div>
       <ul class="flex flex-wrap gap-2 items-center">
         {
-          links.map(({ url, name, isHiddenOnMobile = false }) => {
+          links.map(({ url, name, isHiddenOnMobile = false, isHidden = false }) => {
             const active = isActiveNavItem(url);
+
+            const hiddenClass = 'hidden'
+            const hiddenOnMobileClass = `${hiddenClass} md:inline-block`
+
+            const finalHiddenClass = 
+            isHidden ? hiddenClass : 
+            isHiddenOnMobile ? hiddenOnMobileClass : '' 
+
             return (
-              <li class={isHiddenOnMobile ? 'hidden md:inline-block' : ''}>
+              <li class={finalHiddenClass}>
                 <a
                   data-nav-link
                   data-active={active ? 'true' : 'false'}
