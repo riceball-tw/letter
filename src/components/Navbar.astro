@@ -67,9 +67,12 @@ function isActiveNavItem(navItem: string) {
             const hiddenClass = 'hidden'
             const hiddenOnMobileClass = `${hiddenClass} md:inline-block`
 
-            const finalHiddenClass = 
-            isHidden ? hiddenClass : 
-            isHiddenOnMobile ? hiddenOnMobileClass : '' 
+            let finalHiddenClass = '';
+            if (isHidden) {
+              finalHiddenClass = hiddenClass;
+            } else if (isHiddenOnMobile) {
+              finalHiddenClass = hiddenOnMobileClass;
+            } 
 
             return (
               <li class={finalHiddenClass}>

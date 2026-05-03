@@ -84,7 +84,7 @@ const tabs = [
             })}
           </div>
           {tab.id !== 'all' && 
-            thoughtsWithContent.filter(t => t.data.category === tab.id).length === 0 && (
+            thoughtsWithContent.filter(thought => thought.data.category === tab.id).length === 0 && (
             <p class="text-center text-gray-500 py-12">{t('ThoughtCategory-empty')}</p>
           )}
         </div>
