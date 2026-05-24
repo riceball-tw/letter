@@ -4,11 +4,11 @@ import Base from '@/layouts/Base.astro';
 import Banner from '@/components/Banner.astro';
 import { Icon } from 'astro-icon/components';
 
-import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { languages, useTranslations, getLocale } from '@/i18n/i18n.ts';
 import { resolveAsset } from '@/utils/paths.ts';
 import type { AllowedTechs } from '@/content.config'
 
-const currentLocale = Astro.currentLocale as LanguageKey;
+const currentLocale = getLocale(Astro.currentLocale);
 const t = useTranslations(currentLocale);
 
 const config = await getEntry('config', 'site');

@@ -1,10 +1,10 @@
 ---
 import LanguagePicker from '@/components/LanguagePicker.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { defaultLocale, useTranslations,prefixDefaultLocale,  type LanguageKey } from '@/i18n/i18n.ts';
+import { defaultLocale, useTranslations,prefixDefaultLocale, getLocale } from '@/i18n/i18n.ts';
 import { resolveAsset } from '@/utils/paths.ts';
 
-const t = useTranslations(Astro.currentLocale as LanguageKey);
+const t = useTranslations(getLocale(Astro.currentLocale));
 
 interface NavLink {
   url: string;

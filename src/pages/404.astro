@@ -2,9 +2,9 @@
 import Base from '@/layouts/Base.astro';
 
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { useTranslations, languages, defaultLocale, type LanguageKey } from '@/i18n/i18n.ts';
+import { useTranslations, languages, defaultLocale, getLocale } from '@/i18n/i18n.ts';
 
-const t = useTranslations(Astro.currentLocale as LanguageKey);
+const t = useTranslations(getLocale(Astro.currentLocale));
 
 export function getStaticPaths() {
   return Object.keys(languages).map((language) => ({

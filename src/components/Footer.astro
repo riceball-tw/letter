@@ -1,12 +1,12 @@
 ---
 import { getEntry } from 'astro:content';
-import { defaultLocale, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { defaultLocale, useTranslations, getLocale } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import DOMPurify from 'isomorphic-dompurify';
 
 const config = await getEntry('config', 'site');
 const { website } = config!.data;
-const t = useTranslations(Astro.currentLocale as LanguageKey);
+const t = useTranslations(getLocale(Astro.currentLocale));
 ---
 
 <footer class="print:hidden container mx-auto px-4 py-8">

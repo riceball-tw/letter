@@ -3,12 +3,12 @@ import Base from '@/layouts/Base.astro';
 import Banner from '@/components/Banner.astro';
 import Tabs from '@/components/Tabs.astro';
 import StickyNote from '@/components/StickyNote.astro';
-import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { languages, useTranslations, getLocale } from '@/i18n/i18n.ts';
 import { getCollection, render } from 'astro:content';
 import enTranslation from '@/i18n/en.json';
 
-const currentLocale = Astro.currentLocale as LanguageKey;
-const t = useTranslations(currentLocale as LanguageKey);
+const currentLocale = getLocale(Astro.currentLocale);
+const t = useTranslations(currentLocale);
 
 const thoughts = await getCollection('thought');
 const localeRelatedThoughts = thoughts

@@ -4,7 +4,7 @@ import '@/styles/global.css';
 import { getEntry } from 'astro:content';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
-import { regionTags, useTranslations, type LanguageKey, languageTags, defaultLocale, prefixDefaultLocale } from '@/i18n/i18n.ts';
+import { regionTags, useTranslations, languageTags, defaultLocale, prefixDefaultLocale, getLocale } from '@/i18n/i18n.ts';
 import { resolveAsset } from '@/utils/paths.ts';
 import { ClientRouter } from "astro:transitions";
 
@@ -12,7 +12,7 @@ const config = await getEntry('config', 'site');
 const { favicons, globalOgImage, website } = config!.data;
 const { username } = website;
 
-const t = useTranslations(Astro.currentLocale as LanguageKey);
+const t = useTranslations(getLocale(Astro.currentLocale));
 
 interface Props {
   title?: string;
@@ -26,7 +26,7 @@ const globalDescription = `${
   description || t('Head-3', { name: username })
 }`;
 const globalOgImageAlt = t('Head-4', { name: username });
-const currentLocale = Astro.currentLocale as LanguageKey;
+const currentLocale = getLocale(Astro.currentLocale);
 
 // Custom View Transition Animation
 const anim = {
