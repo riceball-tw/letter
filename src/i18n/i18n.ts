@@ -28,6 +28,27 @@ export type LanguageKey = keyof typeof languages;
 export type LanguageValue = (typeof languages)[LanguageKey];
 
 /**
+ * Type guard to check if a string is a valid LanguageKey
+ * @example isLanguageKey('en') => true
+ * @example isLanguageKey('fr') => false
+ * @example isLanguageKey(undefined) => false
+ */
+export function isLanguageKey(key: string | undefined): key is LanguageKey {
+  return key !== undefined && key in languages;
+}
+
+/**
+ * Returns the given locale if it is a valid LanguageKey, otherwise falls back to defaultLocale
+ * Useful for safely converting Astro.currentLocale (string | undefined) to LanguageKey
+ * @example getLocale('zh-tw') => 'zh-tw'
+ * @example getLocale('fr') => 'en'
+ * @example getLocale(undefined) => 'en'
+ */
+export function getLocale(locale: string | undefined): LanguageKey {
+  return isLanguageKey(locale) ? locale : defaultLocale;
+}
+
+/**
  * Get the translation file based on the target language
  * If the target language is not found, it will fallback to English
  */

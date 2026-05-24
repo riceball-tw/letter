@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { changeLanguage, useTranslations } from './i18n.ts';
+import { changeLanguage, useTranslations, isLanguageKey, getLocale } from './i18n.ts';
 
 describe('useTranslations', () => {
   it('should return the translation for the given key in the target language', () => {
@@ -35,5 +35,36 @@ describe('changeLanguage', () => {
     const path = '/zh-tw/about';
     const newPath = changeLanguage('zh-tw', path);
     expect(newPath).toBe('/about');
+  });
+});
+
+describe('isLanguageKey', () => {
+  it('should return true for valid language keys', () => {
+    expect(isLanguageKey('en')).toBe(true);
+    expect(isLanguageKey('zh-cn')).toBe(true);
+    expect(isLanguageKey('zh-tw')).toBe(true);
+  });
+
+  it('should return false for invalid language keys', () => {
+    expect(isLanguageKey('fr')).toBe(false);
+    expect(isLanguageKey('')).toBe(false);
+  });
+
+  it('should return false for undefined', () => {
+    expect(isLanguageKey(undefined)).toBe(false);
+  });
+});
+
+describe('getLocale', () => {
+  it('should return the locale if it is a valid LanguageKey', () => {
+    expect(getLocale('zh-tw')).toBe('zh-tw');
+  });
+
+  it('should fallback to defaultLocale for invalid locale', () => {
+    expect(getLocale('fr')).toBe('en');
+  });
+
+  it('should fallback to defaultLocale for undefined', () => {
+    expect(getLocale(undefined)).toBe('en');
   });
 });
