@@ -1,9 +1,8 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Banner from '@/components/Banner.astro';
-import { languages, useTranslations, getLocale } from '@/i18n/i18n.ts';
+import { languages, useTranslations, getLocale , defaultLocale } from '@/i18n/i18n.ts';
 import { resolveAsset } from '@/utils/paths.ts';
-import { defaultLocale } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getEntry } from 'astro:content';
 import DOMPurify from 'isomorphic-dompurify';
