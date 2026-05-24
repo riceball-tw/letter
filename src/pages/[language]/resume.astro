@@ -1,14 +1,14 @@
 ---
 import Base from '@/layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { languages, useTranslations, getLocale } from '@/i18n/i18n.ts';
 import { getEntry } from 'astro:content';
 import Tabs from '@/components/Tabs.astro';
 import ModernResume from '@/components/resume/ModernResume.astro';
 import TraditionalResume from '@/components/resume/TraditionalResume.astro';
 
-const currentLocale = Astro.currentLocale as LanguageKey;
-const t = useTranslations(currentLocale as LanguageKey);
+const currentLocale = getLocale(Astro.currentLocale);
+const t = useTranslations(currentLocale);
 const resume = (await getEntry('resume', currentLocale))?.data;
 if (!resume) throw new Error('Resume Data is not found')
 

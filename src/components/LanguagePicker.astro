@@ -1,7 +1,7 @@
 ---
-import { languages, useTranslations, changeLanguage, type LanguageKey } from '@/i18n/i18n.ts';
+import { languages, useTranslations, changeLanguage, getLocale } from '@/i18n/i18n.ts';
 
-const t = useTranslations(Astro.currentLocale as LanguageKey);
+const t = useTranslations(getLocale(Astro.currentLocale));
 ---
 <button aria-label={t('LanguagePicker-1')} class="cursor-pointer hover:bg-primary-100 p-4 rounded-full" popovertarget="i18n-menu" type="button">
   <!-- i18n icon -->
@@ -22,7 +22,7 @@ const t = useTranslations(Astro.currentLocale as LanguageKey);
 
         return (
         <li>
-          {isCurrentLocale ? <span class={`whitespace-nowrap ${linkStyle} ${stateStyle}`}>{name}</span> : <a class={`whitespace-nowrap ${linkStyle} ${stateStyle}`} href={changeLanguage(key as LanguageKey, Astro.url.pathname)}>{name}</a>
+          {isCurrentLocale ? <span class={`whitespace-nowrap ${linkStyle} ${stateStyle}`}>{name}</span> : <a class={`whitespace-nowrap ${linkStyle} ${stateStyle}`} href={changeLanguage(getLocale(key), Astro.url.pathname)}>{name}</a>
           }
         </li>
       )

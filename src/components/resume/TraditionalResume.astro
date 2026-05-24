@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-import { useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { useTranslations, getLocale } from '@/i18n/i18n.ts';
 import DOMPurify from 'isomorphic-dompurify';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { resume } = Astro.props;
-const t = useTranslations(Astro.currentLocale as LanguageKey);
+const t = useTranslations(getLocale(Astro.currentLocale));
 const currentTime = new Date()
   .toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
   .replace(/\//g, '-');

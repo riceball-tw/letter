@@ -1,7 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Banner from '@/components/Banner.astro';
-import { languages, useTranslations, type LanguageKey } from '@/i18n/i18n.ts';
+import { languages, useTranslations, getLocale } from '@/i18n/i18n.ts';
 import { resolveAsset } from '@/utils/paths.ts';
 import { defaultLocale } from '@/i18n/i18n.ts';
 import { getRelativeLocaleUrl } from 'astro:i18n';
@@ -12,7 +12,7 @@ const config = await getEntry('config', 'site');
 const { heroVideo, website: { username, socials } } = config!.data;
 const blogSocial = socials.find(s => s.name === 'Blog');
 const blogUrl = blogSocial && blogSocial.url ? `${blogSocial.url}/${Astro.currentLocale}` : '';
-const t = useTranslations(Astro.currentLocale as LanguageKey);
+const t = useTranslations(getLocale(Astro.currentLocale));
 
 export function getStaticPaths() {
   return Object.keys(languages).map((language) => ({
