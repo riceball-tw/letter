@@ -12,6 +12,9 @@
 
 <br />
 
+> [!TIP]
+> You might be intrested in building personal site too, Check out [Dong blog theme](https://github.com/riceball-tw/dong)!
+
 ![Letter Theme Preview](./public/assets/global/preview.jpg)
 
 Start your online [resume](https://riceball-tw.github.io/letter/en/resume/) or [projects](https://riceball-tw.github.io/letter/en/work/) or even [FAQ](https://riceball-tw.github.io/letter/en/faq/) through fully typed markdown and settings. Check out the [Demo](https://riceball-tw.github.io/letter/en/), hosted on GitHub Pages.
