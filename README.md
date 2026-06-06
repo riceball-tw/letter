@@ -13,7 +13,7 @@
 <br />
 
 > [!TIP]
-> You might be intrested in building personal site too, Check out [Dong blog theme](https://github.com/riceball-tw/dong)!
+> You might be intrested in building blog too, Check out [Dong blog theme](https://github.com/riceball-tw/dong)!
 
 ![Letter Theme Preview](./public/assets/global/preview.jpg)
 
