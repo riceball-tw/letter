@@ -18,7 +18,7 @@ Start your online [resume](https://riceball-tw.github.io/letter/en/resume/) or [
   
 ## Key Features
 
-- Astro v6 + Tailwind v4
+- Astro v7 + Tailwind v4
 - Optimize for speed (100% lighthouse score)
 - Responsive & SEO-friendly
 - Built-in i18n
