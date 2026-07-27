@@ -22,7 +22,8 @@ const publicCurrentLangProjects = await getCollection('project', (project) => {
 const sortedProjects = publicCurrentLangProjects.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 const allProjectTechs = publicCurrentLangProjects.reduce<AllowedTechs[]>((acc, curr) => {
   const techs = curr.data?.tech || []
-  return [...new Set([...acc, ...techs])]
+  const relatedTechs = curr.data?.relatedTechs || []
+  return [...new Set([...acc, ...techs, ...relatedTechs])]
 }, []).sort((a, b) => a.localeCompare(b))
 
 export function getStaticPaths() {
@@ -186,7 +187,7 @@ document.addEventListener("astro:page-load", pageLoadEvent => {
             sortedProjects.map((project, index) => {
               const imagesInsideView = 2;
               return (
-                <li data-tech={project.data.tech} class="relative overflow-hidden flex flex-col gap-4 group">
+                <li data-tech={[...project.data.tech, ...(project.data.relatedTechs || [])].join(",")} class="relative overflow-hidden flex flex-col gap-4 group">
                   {
                     project.data.hasContainerized && (
                       <div class="absolute top-0 right-0 z-(--z-index-work-ribbon)">

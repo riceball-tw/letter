@@ -75,6 +75,11 @@ techGroups:
       - "Go Test"
     icon: "material-symbols:thermostat-rounded"
     themeColor: "#608f03"
+  - id: "Work-TechGroup-CLI"
+    relatedTechs:
+      - "CLI"
+    icon: "material-symbols:terminal-rounded"
+    themeColor: "#e74c3c"
   - id: "Work-TechGroup-Database"
     relatedTechs:
       - "Supabase(Postgres)"
